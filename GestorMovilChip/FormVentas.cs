@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestorMovilChip.Clase;
 using MySql.Data.MySqlClient;
+using GestorMovilChip.Modelos;
+using GestorMovilChip.Datos;
 
 namespace GestorMovilChip
 {
@@ -39,53 +41,34 @@ namespace GestorMovilChip
 
         private void CargarClientes()
         {
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
-
             try
             {
-                conexion.Open();
+                List<Cliente> lista = ClienteDAO.ObtenerTodos(); // sin filtro
 
-                string sql = "SELECT id_cliente, nombre FROM clientes ORDER BY nombre";
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, conexion);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                cmbCliente.DataSource = dt;
-                cmbCliente.DisplayMember = "nombre";
-                cmbCliente.ValueMember = "id_cliente";
-                cmbCliente.SelectedIndex = -1; // cliente opcional
+                cmbCliente.DataSource = null;
+                cmbCliente.DataSource = lista;
+                cmbCliente.DisplayMember = "Nombre";
+                cmbCliente.ValueMember = "IdCliente";
+                cmbCliente.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar clientes:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void CargarProductosCombo()
         {
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
-
             try
             {
-                conexion.Open();
+                List<Producto> lista = ProductoDAO.ObtenerActivosParaVenta();
 
-                string sql = "SELECT id_producto, nombre, precio_venta " +
-                             "FROM productos " +
-                             "WHERE activo = 1 " +
-                             "ORDER BY nombre";
-
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, conexion);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                cmbProducto.DataSource = dt;
-                cmbProducto.DisplayMember = "nombre";
-                cmbProducto.ValueMember = "id_producto";
+                cmbProducto.DataSource = null;
+                cmbProducto.DataSource = lista;
+                cmbProducto.DisplayMember = "Nombre";
+                cmbProducto.ValueMember = "IdProducto";
                 cmbProducto.SelectedIndex = -1;
 
                 txtPrecioUnitario.Text = "";
@@ -95,11 +78,8 @@ namespace GestorMovilChip
                 MessageBox.Show("Error al cargar productos:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void ConfigurarGridLineas()
         {
@@ -119,34 +99,36 @@ namespace GestorMovilChip
 
         private void cmbProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbProducto.SelectedItem != null)
+            Producto p = cmbProducto.SelectedItem as Producto;
+
+            if (p != null)
             {
-                DataRowView fila = cmbProducto.SelectedItem as DataRowView;
-                if (fila != null)
-                {
-                    decimal precio = 0;
-
-                    if (fila["precio_venta"] != DBNull.Value)
-                    {
-                        precio = Convert.ToDecimal(fila["precio_venta"]);
-                    }
-
-                    txtPrecioUnitario.Text = precio.ToString("0.00");
-                }
+                txtPrecioUnitario.Text = p.PrecioVenta.ToString("0.00");
             }
         }
 
+
         private void btnAgregarLinea_Click(object sender, EventArgs e)
         {
-            if (cmbProducto.SelectedValue == null)
+            if (cmbProducto.SelectedItem == null)
             {
                 MessageBox.Show("Selecciona un producto.",
                     "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            int idProducto = Convert.ToInt32(cmbProducto.SelectedValue);
-            string nombreProducto = ((DataRowView)cmbProducto.SelectedItem)["nombre"].ToString();
+            // Ahora el combo trabaja con objetos Producto, no con DataRowView
+            Producto p = cmbProducto.SelectedItem as Producto;
+
+            if (p == null)
+            {
+                MessageBox.Show("Error al obtener el producto seleccionado.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int idProducto = p.IdProducto;
+            string nombreProducto = p.Nombre;
 
             decimal precioUnitario;
             if (!decimal.TryParse(txtPrecioUnitario.Text.Trim(), out precioUnitario))
@@ -156,16 +138,21 @@ namespace GestorMovilChip
                 return;
             }
 
-            int cantidad = Convert.ToInt32(nudCantidad.Value);
+            int cantidad = (int)nudCantidad.Value;
             decimal subtotal = precioUnitario * cantidad;
 
             // Añadir fila al grid
-            dgvLineas.Rows.Add(idProducto, nombreProducto, cantidad,
-                               precioUnitario.ToString("0.00"),
-                               subtotal.ToString("0.00"));
+            dgvLineas.Rows.Add(
+                idProducto,
+                nombreProducto,
+                cantidad,
+                precioUnitario.ToString("0.00"),
+                subtotal.ToString("0.00")
+            );
 
             CalcularTotal();
         }
+
 
         private void btnQuitarLinea_Click(object sender, EventArgs e)
         {
@@ -233,89 +220,49 @@ namespace GestorMovilChip
                 return;
             }
 
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
-            MySqlTransaction transaccion = null;
+            // Construimos el objeto Venta
+            Venta v = new Venta();
+            v.Fecha = DateTime.Now;
+            v.IdUsuario = idUsuario;
+            v.Total = total;
+
+            if (cmbCliente.SelectedValue != null)
+                v.IdCliente = Convert.ToInt32(cmbCliente.SelectedValue);
+            else
+                v.IdCliente = null;
+
+            // Construimos la lista de detalles desde el grid
+            List<DetalleVenta> detalles = new List<DetalleVenta>();
+
+            foreach (DataGridViewRow fila in dgvLineas.Rows)
+            {
+                if (fila.IsNewRow) continue;
+
+                DetalleVenta d = new DetalleVenta();
+                d.IdProducto = Convert.ToInt32(fila.Cells["id_producto"].Value);
+                d.Cantidad = Convert.ToInt32(fila.Cells["cantidad"].Value);
+                d.PrecioUnitario = Convert.ToDecimal(fila.Cells["precio_unitario"].Value);
+                d.Subtotal = Convert.ToDecimal(fila.Cells["subtotal"].Value);
+
+                detalles.Add(d);
+            }
 
             try
             {
-                conexion.Open();
-                transaccion = conexion.BeginTransaction();
+                int idVentaNueva = VentaDAO.InsertarVentaConDetalles(v, detalles);
 
-                // 1) Insertar en ventas
-                string sqlVenta = "INSERT INTO ventas (fecha, id_cliente, id_usuario, total) " +
-                                  "VALUES (@fecha, @id_cliente, @id_usuario, @total)";
-
-                MySqlCommand cmdVenta = new MySqlCommand(sqlVenta, conexion, transaccion);
-                cmdVenta.Parameters.AddWithValue("@fecha", DateTime.Now);
-
-                object idCliente = DBNull.Value;
-                if (cmbCliente.SelectedValue != null)
-                {
-                    idCliente = cmbCliente.SelectedValue;
-                }
-                cmdVenta.Parameters.AddWithValue("@id_cliente", idCliente);
-
-                cmdVenta.Parameters.AddWithValue("@id_usuario", idUsuario);
-                cmdVenta.Parameters.AddWithValue("@total", total);
-
-                cmdVenta.ExecuteNonQuery();
-                long idVenta = cmdVenta.LastInsertedId;
-
-                // 2) Insertar detalle_venta + actualizar stock
-                foreach (DataGridViewRow fila in dgvLineas.Rows)
-                {
-                    int idProducto = Convert.ToInt32(fila.Cells["id_producto"].Value);
-                    int cantidad = Convert.ToInt32(fila.Cells["cantidad"].Value);
-                    decimal precioUnitario = Convert.ToDecimal(fila.Cells["precio_unitario"].Value);
-                    decimal subtotal = Convert.ToDecimal(fila.Cells["subtotal"].Value);
-
-                    // detalle_venta
-                    string sqlDetalle = "INSERT INTO detalle_venta " +
-                                        "(id_venta, id_producto, cantidad, precio_unitario, subtotal) " +
-                                        "VALUES (@id_venta, @id_producto, @cantidad, @precio_unitario, @subtotal)";
-
-                    MySqlCommand cmdDetalle = new MySqlCommand(sqlDetalle, conexion, transaccion);
-                    cmdDetalle.Parameters.AddWithValue("@id_venta", idVenta);
-                    cmdDetalle.Parameters.AddWithValue("@id_producto", idProducto);
-                    cmdDetalle.Parameters.AddWithValue("@cantidad", cantidad);
-                    cmdDetalle.Parameters.AddWithValue("@precio_unitario", precioUnitario);
-                    cmdDetalle.Parameters.AddWithValue("@subtotal", subtotal);
-                    cmdDetalle.ExecuteNonQuery();
-
-                    // actualizar stock
-                    string sqlStock = "UPDATE productos " +
-                                      "SET stock = stock - @cantidad " +
-                                      "WHERE id_producto = @id_producto";
-
-                    MySqlCommand cmdStock = new MySqlCommand(sqlStock, conexion, transaccion);
-                    cmdStock.Parameters.AddWithValue("@cantidad", cantidad);
-                    cmdStock.Parameters.AddWithValue("@id_producto", idProducto);
-                    cmdStock.ExecuteNonQuery();
-                }
-
-                // 3) Confirmar transacción
-                transaccion.Commit();
-
-                MessageBox.Show("Venta guardada correctamente.",
+                MessageBox.Show("Venta guardada correctamente. ID: " + idVentaNueva,
                     "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimpiarVenta();
             }
             catch (Exception ex)
             {
-                if (transaccion != null)
-                {
-                    transaccion.Rollback();
-                }
-
                 MessageBox.Show("Error al guardar la venta:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
     }
 }

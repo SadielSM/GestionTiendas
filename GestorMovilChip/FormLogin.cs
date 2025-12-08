@@ -30,7 +30,9 @@ namespace GestorMovilChip
                 return;
             }
 
-            // Consultamos en la tabla usuarios
+            // Calculamos el hash de la contraseña introducida
+            string hashContraseña = Seguridad.CalcularHash(contraseña);
+
             MySqlConnection conexion = ConexionBD.ObtenerConexion();
             try
             {
@@ -43,7 +45,7 @@ namespace GestorMovilChip
 
                 MySqlCommand cmd = new MySqlCommand(sql, conexion);
                 cmd.Parameters.AddWithValue("@usuario", usuario);
-                cmd.Parameters.AddWithValue("@contraseña", contraseña);
+                cmd.Parameters.AddWithValue("@contraseña", hashContraseña);
 
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -53,10 +55,8 @@ namespace GestorMovilChip
                     string nombre = reader.GetString("nombre");
                     string rol = reader.GetString("rol");
 
-                    // Login correcto → abrir menú principal
                     FormMenuPrincipal menu = new FormMenuPrincipal(idUsuario, nombre, rol);
                     menu.Show();
-
                     this.Hide();
                 }
                 else
@@ -75,8 +75,9 @@ namespace GestorMovilChip
             {
                 conexion.Close();
             }
+
         }
 
-    
-}
+
+    }
 }

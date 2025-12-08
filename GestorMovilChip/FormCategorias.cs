@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestorMovilChip.Clase;
 using MySql.Data.MySqlClient;
+using GestorMovilChip.Datos;
+using GestorMovilChip.Modelos;
 
 namespace GestorMovilChip
 {
@@ -29,40 +31,33 @@ namespace GestorMovilChip
         {
             if (dgvCategorias.Columns.Count > 0)
             {
-                dgvCategorias.Columns["id_categoria"].HeaderText = "ID";
-                dgvCategorias.Columns["nombre"].HeaderText = "Nombre";
-                dgvCategorias.Columns["descripcion"].HeaderText = "Descripción";
+                dgvCategorias.Columns["IdCategoria"].HeaderText = "ID";
+                dgvCategorias.Columns["Nombre"].HeaderText = "Nombre";
+                dgvCategorias.Columns["Descripcion"].HeaderText = "Descripción";
 
-                dgvCategorias.Columns["id_categoria"].Width = 60;
+                dgvCategorias.Columns["IdCategoria"].Width = 60;
             }
         }
 
+
         private void CargarCategorias()
         {
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
-
             try
             {
-                conexion.Open();
+                List<Categoria> lista = CategoriaDAO.ObtenerTodas();
 
-                string sql = "SELECT id_categoria, nombre, descripcion FROM categorias ORDER BY id_categoria";
+                dgvCategorias.DataSource = null;
+                dgvCategorias.DataSource = lista;
 
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, conexion);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvCategorias.DataSource = dt;
+                ConfigurarGrid();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar categorías:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void LimpiarCampos()
         {
@@ -75,11 +70,17 @@ namespace GestorMovilChip
         {
             if (e.RowIndex >= 0 && dgvCategorias.CurrentRow != null)
             {
-                txtId.Text = dgvCategorias.CurrentRow.Cells["id_categoria"].Value.ToString();
-                txtNombre.Text = dgvCategorias.CurrentRow.Cells["nombre"].Value.ToString();
-                txtDescripcion.Text = dgvCategorias.CurrentRow.Cells["descripcion"].Value.ToString();
+                Categoria cat = dgvCategorias.CurrentRow.DataBoundItem as Categoria;
+
+                if (cat != null)
+                {
+                    txtId.Text = cat.IdCategoria.ToString();
+                    txtNombre.Text = cat.Nombre;
+                    txtDescripcion.Text = cat.Descripcion;
+                }
             }
         }
+
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -99,37 +100,27 @@ namespace GestorMovilChip
                 return;
             }
 
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
+            Categoria cat = new Categoria();
+            cat.Nombre = nombre;
+            cat.Descripcion = descripcion;
+
+            bool ok = false;
 
             try
             {
-                conexion.Open();
-
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conexion;
-
                 if (txtId.Text == "")
                 {
                     // INSERT
-                    cmd.CommandText = "INSERT INTO categorias (nombre, descripcion) " +
-                                      "VALUES (@nombre, @descripcion)";
+                    ok = CategoriaDAO.Insertar(cat);
                 }
                 else
                 {
                     // UPDATE
-                    cmd.CommandText = "UPDATE categorias " +
-                                      "SET nombre = @nombre, descripcion = @descripcion " +
-                                      "WHERE id_categoria = @id";
-
-                    cmd.Parameters.AddWithValue("@id", txtId.Text);
+                    cat.IdCategoria = Convert.ToInt32(txtId.Text);
+                    ok = CategoriaDAO.Actualizar(cat);
                 }
 
-                cmd.Parameters.AddWithValue("@nombre", nombre);
-                cmd.Parameters.AddWithValue("@descripcion", descripcion);
-
-                int filas = cmd.ExecuteNonQuery();
-
-                if (filas > 0)
+                if (ok)
                 {
                     MessageBox.Show("Categoría guardada correctamente.",
                         "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -148,11 +139,8 @@ namespace GestorMovilChip
                 MessageBox.Show("Error al guardar la categoría:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -173,19 +161,13 @@ namespace GestorMovilChip
             if (r != DialogResult.Yes)
                 return;
 
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
+            int id = Convert.ToInt32(txtId.Text);
 
             try
             {
-                conexion.Open();
+                bool ok = CategoriaDAO.Eliminar(id);
 
-                string sql = "DELETE FROM categorias WHERE id_categoria = @id";
-                MySqlCommand cmd = new MySqlCommand(sql, conexion);
-                cmd.Parameters.AddWithValue("@id", txtId.Text);
-
-                int filas = cmd.ExecuteNonQuery();
-
-                if (filas > 0)
+                if (ok)
                 {
                     MessageBox.Show("Categoría eliminada correctamente.",
                         "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -199,23 +181,13 @@ namespace GestorMovilChip
                         "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (MySqlException ex)
-            {
-                // Por si la categoría está en uso en productos (FK)
-                MessageBox.Show("No se puede eliminar la categoría. " +
-                                "Es posible que tenga productos asociados.\n\nDetalle técnico:\n" + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al eliminar la categoría:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {

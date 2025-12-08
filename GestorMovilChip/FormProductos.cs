@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestorMovilChip.Clase;
 using MySql.Data.MySqlClient;
+using GestorMovilChip.Modelos;
+using GestorMovilChip.Datos;
 
 namespace GestorMovilChip
 {
@@ -17,13 +19,21 @@ namespace GestorMovilChip
         public FormProductos()
         {
             InitializeComponent();
+            EstilosUI.AplicarEstiloFormulario(this);
+
+            EstilosUI.AplicarEstiloDataGridView(dgvProductos);
+            EstilosUI.AplicarEstiloBoton(btnNuevo);
+            EstilosUI.AplicarEstiloBoton(btnGuardar);
+            EstilosUI.AplicarEstiloBotonSecundario(btnEliminar);
+            EstilosUI.AplicarEstiloBotonSecundario(btnCancelar);
+
         }
 
         private void FormProductos_Load(object sender, EventArgs e)
         {
             CargarCategoriasCombo();
             CargarProductos();
-            ConfigurarGrid();
+           // ConfigurarGrid();
         }
 
         private void CargarCategoriasCombo()
@@ -58,73 +68,45 @@ namespace GestorMovilChip
 
         private void CargarProductos(string filtroNombre = "")
         {
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
-
             try
             {
-                conexion.Open();
+                List<Producto> lista = ProductoDAO.ObtenerTodos(filtroNombre);
 
-                string sql = "SELECT p.id_producto, p.nombre, p.descripcion, " +
-                             "p.id_categoria, c.nombre AS categoria, " +
-                             "p.precio_compra, p.precio_venta, p.stock, " +
-                             "p.codigo_barras, p.activo " +
-                             "FROM productos p " +
-                             "INNER JOIN categorias c ON p.id_categoria = c.id_categoria";
+                dgvProductos.DataSource = null;
+                dgvProductos.DataSource = lista;
 
-                if (filtroNombre != "")
-                {
-                    sql += " WHERE p.nombre LIKE @filtro";
-                }
-
-                sql += " ORDER BY p.id_producto";
-
-                MySqlCommand cmd = new MySqlCommand(sql, conexion);
-
-                if (filtroNombre != "")
-                {
-                    cmd.Parameters.AddWithValue("@filtro", "%" + filtroNombre + "%");
-                }
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvProductos.DataSource = dt;
+                ConfigurarGrid();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar productos:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void ConfigurarGrid()
         {
             if (dgvProductos.Columns.Count > 0)
             {
-                dgvProductos.Columns["id_producto"].HeaderText = "ID";
-                dgvProductos.Columns["nombre"].HeaderText = "Nombre";
-                dgvProductos.Columns["descripcion"].HeaderText = "Descripción";
-                dgvProductos.Columns["categoria"].HeaderText = "Categoría";
-                dgvProductos.Columns["precio_compra"].HeaderText = "P. Compra";
-                dgvProductos.Columns["precio_venta"].HeaderText = "P. Venta";
-                dgvProductos.Columns["stock"].HeaderText = "Stock";
-                dgvProductos.Columns["codigo_barras"].HeaderText = "Código barras";
-                dgvProductos.Columns["activo"].HeaderText = "Activo";
+                dgvProductos.Columns["IdProducto"].HeaderText = "ID";
+                dgvProductos.Columns["Nombre"].HeaderText = "Nombre";
+                dgvProductos.Columns["Descripcion"].HeaderText = "Descripción";
+                dgvProductos.Columns["NombreCategoria"].HeaderText = "Categoría";
+                dgvProductos.Columns["PrecioCompra"].HeaderText = "P. Compra";
+                dgvProductos.Columns["PrecioVenta"].HeaderText = "P. Venta";
+                dgvProductos.Columns["Stock"].HeaderText = "Stock";
+                dgvProductos.Columns["CodigoBarras"].HeaderText = "Código barras";
+                dgvProductos.Columns["Activo"].HeaderText = "Activo";
 
-                // columnas internas que igual no quieres mostrar
-                if (dgvProductos.Columns["id_categoria"] != null)
-                {
-                    dgvProductos.Columns["id_categoria"].Visible = false;
-                }
+                // columnas que puedes ocultar
+                if (dgvProductos.Columns["IdCategoria"] != null)
+                    dgvProductos.Columns["IdCategoria"].Visible = false;
 
-                dgvProductos.Columns["id_producto"].Width = 50;
+                dgvProductos.Columns["IdProducto"].Width = 50;
             }
         }
+
 
         private void LimpiarCampos()
         {
@@ -146,30 +128,19 @@ namespace GestorMovilChip
         {
             if (e.RowIndex >= 0 && dgvProductos.CurrentRow != null)
             {
-                txtIdProducto.Text = dgvProductos.CurrentRow.Cells["id_producto"].Value.ToString();
-                txtNombre.Text = dgvProductos.CurrentRow.Cells["nombre"].Value.ToString();
-                txtDescripcion.Text = dgvProductos.CurrentRow.Cells["descripcion"].Value.ToString();
-                txtPrecioCompra.Text = dgvProductos.CurrentRow.Cells["precio_compra"].Value.ToString();
-                txtPrecioVenta.Text = dgvProductos.CurrentRow.Cells["precio_venta"].Value.ToString();
-                txtStock.Text = dgvProductos.CurrentRow.Cells["stock"].Value.ToString();
-                txtCodigoBarras.Text = dgvProductos.CurrentRow.Cells["codigo_barras"].Value.ToString();
+                Producto p = dgvProductos.CurrentRow.DataBoundItem as Producto;
 
-                // activo
-                object valorActivo = dgvProductos.CurrentRow.Cells["activo"].Value;
-                if (valorActivo != null && valorActivo.ToString() == "1")
+                if (p != null)
                 {
-                    chkActivo.Checked = true;
-                }
-                else
-                {
-                    chkActivo.Checked = false;
-                }
-
-                // categoría
-                object idCat = dgvProductos.CurrentRow.Cells["id_categoria"].Value;
-                if (idCat != null)
-                {
-                    cmbCategoria.SelectedValue = idCat;
+                    txtIdProducto.Text = p.IdProducto.ToString();
+                    txtNombre.Text = p.Nombre;
+                    txtDescripcion.Text = p.Descripcion;
+                    txtPrecioCompra.Text = p.PrecioCompra.ToString("0.00");
+                    txtPrecioVenta.Text = p.PrecioVenta.ToString("0.00");
+                    txtStock.Text = p.Stock.ToString();
+                    txtCodigoBarras.Text = p.CodigoBarras;
+                    chkActivo.Checked = p.Activo;
+                    cmbCategoria.SelectedValue = p.IdCategoria;
                 }
             }
         }
@@ -333,19 +304,13 @@ namespace GestorMovilChip
             if (r != DialogResult.Yes)
                 return;
 
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
+            int id = Convert.ToInt32(txtIdProducto.Text);
 
             try
             {
-                conexion.Open();
+                bool ok = ProductoDAO.Eliminar(id);
 
-                string sql = "DELETE FROM productos WHERE id_producto = @id";
-                MySqlCommand cmd = new MySqlCommand(sql, conexion);
-                cmd.Parameters.AddWithValue("@id", txtIdProducto.Text);
-
-                int filas = cmd.ExecuteNonQuery();
-
-                if (filas > 0)
+                if (ok)
                 {
                     MessageBox.Show("Producto eliminado correctamente.",
                         "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -359,22 +324,13 @@ namespace GestorMovilChip
                         "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show("No se puede eliminar el producto. " +
-                                "Puede estar relacionado con ventas.\n\nDetalle técnico:\n" + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al eliminar el producto:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {

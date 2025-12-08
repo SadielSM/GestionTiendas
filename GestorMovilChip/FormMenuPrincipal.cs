@@ -22,9 +22,32 @@ namespace GestorMovilChip
         public FormMenuPrincipal(int idUsuario, string nombreUsuario, string rolUsuario)
         {
             InitializeComponent();
+           
             this.idUsuario = idUsuario;
             this.nombreUsuario = nombreUsuario;
             this.rolUsuario = rolUsuario;
+
+            EstilosUI.AplicarEstiloFormulario(this);
+
+            // Paneles
+            panelTop.BackColor = EstilosUI.ColorPanel;
+            panelLeft.BackColor = Color.FromArgb(40, 40, 55);
+
+            // Títulos
+            EstilosUI.AplicarEstiloLabelTitulo(lblTituloApp);
+            lblTituloApp.ForeColor = EstilosUI.ColorTextoClaro;
+
+            lblUsuarioLogueado.ForeColor = EstilosUI.ColorTextoClaro;
+
+            // Botones del menú lateral
+            EstilosUI.AplicarEstiloBoton(btnProductos);
+            EstilosUI.AplicarEstiloBoton(btnCategorias);
+            EstilosUI.AplicarEstiloBoton(btnClientes);
+            EstilosUI.AplicarEstiloBoton(btnVentas);
+            EstilosUI.AplicarEstiloBoton(btnListadoVentas);
+
+            // Si tienes un botón de salir:
+            // EstilosUI.AplicarEstiloBotonSecundario(btnSalir);
         }
 
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
@@ -33,9 +56,10 @@ namespace GestorMovilChip
             this.Text = "Gestor Tienda - " + nombreUsuario + " (" + rolUsuario + ")";
 
             // Si tienes un label de bienvenida:
-             lblBienvenida.Text = "Bienvenido, " + nombreUsuario;
+            lblUsuarioLogueado.Text = "Bienvenido, " + nombreUsuario;
 
             CargarResumenDashboard();
+            AplicarPermisosPorRol();
         }
 
         private void FormMenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
@@ -193,6 +217,37 @@ namespace GestorMovilChip
             }
         }
 
+        private void FormMenuPrincipal_Activated(object sender, EventArgs e)
+        {
+            CargarResumenDashboard();
+        }
 
+        private void btnRefrescarDashboard_Click(object sender, EventArgs e)
+        {
+            CargarResumenDashboard();
+        }
+
+        private bool EsAdmin
+        {
+            get { return rolUsuario != null && rolUsuario.ToLower() == "admin"; }
+        }
+
+        private void AplicarPermisosPorRol()
+        {
+            if (!EsAdmin)
+            {
+                // un empleado NO puede ver el listado global de ventas
+                btnListadoVentas.Enabled = false;
+                // Lo podemos ocultar si queremos: 
+                // btnListadoVentas.Visible = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Calcular Hash
+            Console.Write(Seguridad.CalcularHash("1234"));
+             MessageBox.Show(Seguridad.CalcularHash("1234"));
+        }
     }
 }

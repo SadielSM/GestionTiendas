@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestorMovilChip.Clase;
 using MySql.Data.MySqlClient;
+using GestorMovilChip.Datos;
+using GestorMovilChip.Modelos;
 
 namespace GestorMovilChip
 {
@@ -29,51 +31,41 @@ namespace GestorMovilChip
 
         private void CargarVentas()
         {
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
-
             try
             {
-                conexion.Open();
+                List<Venta> lista = VentaDAO.ObtenerVentas();
 
-                string sql = "SELECT v.id_venta, v.fecha, " +
-                             "IFNULL(c.nombre, '(Sin cliente)') AS cliente, " +
-                             "u.nombre AS usuario, v.total " +
-                             "FROM ventas v " +
-                             "LEFT JOIN clientes c ON v.id_cliente = c.id_cliente " +
-                             "INNER JOIN usuarios u ON v.id_usuario = u.id_usuario " +
-                             "ORDER BY v.fecha DESC";
+                dgvVentas.DataSource = null;
+                dgvVentas.DataSource = lista;
 
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, conexion);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvVentas.DataSource = dt;
+                ConfigurarGridVentas();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar ventas:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void ConfigurarGridVentas()
         {
             if (dgvVentas.Columns.Count > 0)
             {
-                dgvVentas.Columns["id_venta"].HeaderText = "ID";
-                dgvVentas.Columns["fecha"].HeaderText = "Fecha";
-                dgvVentas.Columns["cliente"].HeaderText = "Cliente";
-                dgvVentas.Columns["usuario"].HeaderText = "Usuario";
-                dgvVentas.Columns["total"].HeaderText = "Total";
+                dgvVentas.Columns["IdVenta"].HeaderText = "ID";
+                dgvVentas.Columns["Fecha"].HeaderText = "Fecha";
+                dgvVentas.Columns["NombreCliente"].HeaderText = "Cliente";
+                dgvVentas.Columns["NombreUsuario"].HeaderText = "Usuario";
+                dgvVentas.Columns["Total"].HeaderText = "Total";
 
-                dgvVentas.Columns["id_venta"].Width = 60;
-                dgvVentas.Columns["total"].Width = 80;
+                dgvVentas.Columns["IdCliente"].Visible = false;
+                dgvVentas.Columns["IdUsuario"].Visible = false;
+
+                dgvVentas.Columns["IdVenta"].Width = 60;
+                dgvVentas.Columns["Total"].Width = 80;
             }
         }
+
 
         private void ConfigurarGridDetalle()
         {
@@ -97,63 +89,41 @@ namespace GestorMovilChip
         {
             if (e.RowIndex >= 0 && dgvVentas.CurrentRow != null)
             {
-                int idVenta = Convert.ToInt32(dgvVentas.CurrentRow.Cells["id_venta"].Value);
-                lblTotalVenta.Text = dgvVentas.CurrentRow.Cells["total"].Value.ToString();
+                Venta v = dgvVentas.CurrentRow.DataBoundItem as Venta;
 
-                CargarDetalleVenta(idVenta);
+                if (v != null)
+                {
+                    lblTotalVenta.Text = v.Total.ToString("0.00");
+                    CargarDetalleVenta(v.IdVenta);
+                }
             }
         }
+
 
         private void CargarDetalleVenta(int idVenta)
         {
             dgvDetalle.Rows.Clear();
 
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
-
             try
             {
-                conexion.Open();
+                List<DetalleVenta> lista = VentaDAO.ObtenerDetalleVenta(idVenta);
 
-                string sql = "SELECT dv.id_detalle, dv.id_producto, p.nombre, " +
-                             "dv.cantidad, dv.precio_unitario, dv.subtotal " +
-                             "FROM detalle_venta dv " +
-                             "INNER JOIN productos p ON dv.id_producto = p.id_producto " +
-                             "WHERE dv.id_venta = @id_venta";
-
-                MySqlCommand cmd = new MySqlCommand(sql, conexion);
-                cmd.Parameters.AddWithValue("@id_venta", idVenta);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                foreach (DetalleVenta d in lista)
                 {
-                    int idDetalle = reader.GetInt32("id_detalle");
-                    int idProducto = reader.GetInt32("id_producto");
-                    string nombreProducto = reader.GetString("nombre");
-                    int cantidad = reader.GetInt32("cantidad");
-                    decimal precioUnitario = reader.GetDecimal("precio_unitario");
-                    decimal subtotal = reader.GetDecimal("subtotal");
-
                     dgvDetalle.Rows.Add(
-                        idDetalle,
-                        idProducto,
-                        nombreProducto,
-                        cantidad,
-                        precioUnitario.ToString("0.00"),
-                        subtotal.ToString("0.00")
+                        d.IdDetalle,
+                        d.IdProducto,
+                        d.NombreProducto,
+                        d.Cantidad,
+                        d.PrecioUnitario.ToString("0.00"),
+                        d.Subtotal.ToString("0.00")
                     );
                 }
-
-                reader.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar el detalle de la venta:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexion.Close();
             }
         }
 

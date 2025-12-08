@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestorMovilChip.Clase;
 using MySql.Data.MySqlClient;
+using GestorMovilChip.Modelos;
+using GestorMovilChip.Datos;
 
 namespace GestorMovilChip
 {
@@ -29,56 +31,33 @@ namespace GestorMovilChip
         {
             if (dgvClientes.Columns.Count > 0)
             {
-                dgvClientes.Columns["id_cliente"].HeaderText = "ID";
-                dgvClientes.Columns["nombre"].HeaderText = "Nombre";
-                dgvClientes.Columns["telefono"].HeaderText = "Teléfono";
-                dgvClientes.Columns["email"].HeaderText = "Email";
-                dgvClientes.Columns["dni"].HeaderText = "DNI";
-                dgvClientes.Columns["direccion"].HeaderText = "Dirección";
+                dgvClientes.Columns["IdCliente"].HeaderText = "ID";
+                dgvClientes.Columns["Nombre"].HeaderText = "Nombre";
+                dgvClientes.Columns["Telefono"].HeaderText = "Teléfono";
+                dgvClientes.Columns["Email"].HeaderText = "Email";
+                dgvClientes.Columns["Dni"].HeaderText = "DNI";
+                dgvClientes.Columns["Direccion"].HeaderText = "Dirección";
 
-                dgvClientes.Columns["id_cliente"].Width = 60;
+                dgvClientes.Columns["IdCliente"].Width = 60;
             }
         }
 
+
         private void CargarClientes(string filtroNombre = "")
         {
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
-
             try
             {
-                conexion.Open();
+                List<Cliente> lista = ClienteDAO.ObtenerTodos(filtroNombre);
 
-                string sql = "SELECT id_cliente, nombre, telefono, email, dni, direccion " +
-                             "FROM clientes";
+                dgvClientes.DataSource = null;
+                dgvClientes.DataSource = lista;
 
-                if (filtroNombre != "")
-                {
-                    sql += " WHERE nombre LIKE @filtro";
-                }
-
-                sql += " ORDER BY nombre";
-
-                MySqlCommand cmd = new MySqlCommand(sql, conexion);
-
-                if (filtroNombre != "")
-                {
-                    cmd.Parameters.AddWithValue("@filtro", "%" + filtroNombre + "%");
-                }
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvClientes.DataSource = dt;
+                ConfigurarGrid();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar clientes:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexion.Close();
             }
         }
 
@@ -97,14 +76,20 @@ namespace GestorMovilChip
         {
             if (e.RowIndex >= 0 && dgvClientes.CurrentRow != null)
             {
-                txtIdCliente.Text = dgvClientes.CurrentRow.Cells["id_cliente"].Value.ToString();
-                txtNombre.Text = dgvClientes.CurrentRow.Cells["nombre"].Value.ToString();
-                txtTelefono.Text = dgvClientes.CurrentRow.Cells["telefono"].Value.ToString();
-                txtEmail.Text = dgvClientes.CurrentRow.Cells["email"].Value.ToString();
-                txtDni.Text = dgvClientes.CurrentRow.Cells["dni"].Value.ToString();
-                txtDireccion.Text = dgvClientes.CurrentRow.Cells["direccion"].Value.ToString();
+                Cliente c = dgvClientes.CurrentRow.DataBoundItem as Cliente;
+
+                if (c != null)
+                {
+                    txtIdCliente.Text = c.IdCliente.ToString();
+                    txtNombre.Text = c.Nombre;
+                    txtTelefono.Text = c.Telefono;
+                    txtEmail.Text = c.Email;
+                    txtDni.Text = c.Dni;
+                    txtDireccion.Text = c.Direccion;
+                }
             }
         }
+
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -127,42 +112,28 @@ namespace GestorMovilChip
                 return;
             }
 
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
+            Cliente c = new Cliente();
+            c.Nombre = nombre;
+            c.Telefono = telefono;
+            c.Email = email;
+            c.Dni = dni;
+            c.Direccion = direccion;
+
+            bool ok = false;
 
             try
             {
-                conexion.Open();
-
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conexion;
-
                 if (txtIdCliente.Text == "")
                 {
-                    // INSERT
-                    cmd.CommandText = "INSERT INTO clientes " +
-                                      "(nombre, telefono, email, dni, direccion) " +
-                                      "VALUES (@nombre, @telefono, @email, @dni, @direccion)";
+                    ok = ClienteDAO.Insertar(c);
                 }
                 else
                 {
-                    // UPDATE
-                    cmd.CommandText = "UPDATE clientes SET " +
-                                      "nombre = @nombre, telefono = @telefono, " +
-                                      "email = @email, dni = @dni, direccion = @direccion " +
-                                      "WHERE id_cliente = @id_cliente";
-
-                    cmd.Parameters.AddWithValue("@id_cliente", txtIdCliente.Text);
+                    c.IdCliente = Convert.ToInt32(txtIdCliente.Text);
+                    ok = ClienteDAO.Actualizar(c);
                 }
 
-                cmd.Parameters.AddWithValue("@nombre", nombre);
-                cmd.Parameters.AddWithValue("@telefono", telefono);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@dni", dni);
-                cmd.Parameters.AddWithValue("@direccion", direccion);
-
-                int filas = cmd.ExecuteNonQuery();
-
-                if (filas > 0)
+                if (ok)
                 {
                     MessageBox.Show("Cliente guardado correctamente.",
                         "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -181,11 +152,8 @@ namespace GestorMovilChip
                 MessageBox.Show("Error al guardar el cliente:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -206,19 +174,13 @@ namespace GestorMovilChip
             if (r != DialogResult.Yes)
                 return;
 
-            MySqlConnection conexion = ConexionBD.ObtenerConexion();
+            int id = Convert.ToInt32(txtIdCliente.Text);
 
             try
             {
-                conexion.Open();
+                bool ok = ClienteDAO.Eliminar(id);
 
-                string sql = "DELETE FROM clientes WHERE id_cliente = @id";
-                MySqlCommand cmd = new MySqlCommand(sql, conexion);
-                cmd.Parameters.AddWithValue("@id", txtIdCliente.Text);
-
-                int filas = cmd.ExecuteNonQuery();
-
-                if (filas > 0)
+                if (ok)
                 {
                     MessageBox.Show("Cliente eliminado correctamente.",
                         "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -232,23 +194,13 @@ namespace GestorMovilChip
                         "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (MySqlException ex)
-            {
-                // Por si en un futuro quieres bloquear eliminación si tiene ventas asociadas
-                MessageBox.Show("No se puede eliminar el cliente. " +
-                                "Es posible que tenga ventas asociadas.\n\nDetalle:\n" + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al eliminar el cliente:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexion.Close();
-            }
         }
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {

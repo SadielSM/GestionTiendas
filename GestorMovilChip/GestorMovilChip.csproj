@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clase\ConexionBD.cs" />
+    <Compile Include="Clase\EstilosUI.cs" />
+    <Compile Include="Clase\Seguridad.cs" />
+    <Compile Include="Datos\CategoriaDAO.cs" />
+    <Compile Include="Datos\ClienteDAO.cs" />
+    <Compile Include="Datos\ProductoDAO.cs" />
+    <Compile Include="Datos\VentaDAO.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,11 @@
     <Compile Include="FormVentas.Designer.cs">
       <DependentUpon>FormVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\Categoria.cs" />
+    <Compile Include="Modelos\Cliente.cs" />
+    <Compile Include="Modelos\DetalleVenta.cs" />
+    <Compile Include="Modelos\Producto.cs" />
+    <Compile Include="Modelos\Venta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
