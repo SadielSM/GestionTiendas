@@ -80,7 +80,6 @@ C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\bin\Debug\System.N
 C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.csproj.AssemblyReference.cache
-C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.Form1.resources
 C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormCategorias.resources
 C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormClientes.resources
 C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormListadoVentas.resources

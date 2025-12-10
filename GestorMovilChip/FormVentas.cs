@@ -23,6 +23,115 @@ namespace GestorMovilChip
             InitializeComponent();
             this.idUsuario = idUsuario;
             this.nombreUsuario = nombreUsuario;
+
+            // Ventana fija, sin maximizar
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            // === FONDO OSCURO GENERAL (como la pantalla principal) ===
+            EstilosUI.AplicarEstiloFormularioOscuro(this);
+
+            // === GRID IZQUIERDO (líneas de venta) ===
+            EstilosUI.AplicarEstiloDataGridView(dgvLineas);
+            dgvLineas.BackgroundColor = EstilosUI.ColorFondoOscuro;
+
+            splitVentas.Panel1.BackColor = EstilosUI.ColorFondoOscuro;
+            tableLayoutPanel2.BackColor = EstilosUI.ColorFondoOscuro; // el que contiene dgvLineas + total
+            tableLayoutPanel3.BackColor = EstilosUI.ColorFondoOscuro; // fila del Total
+
+            // Total abajo
+            label7.ForeColor = EstilosUI.ColorTextoClaro;  // "Total:"
+            lblTotal.ForeColor = EstilosUI.ColorTextoClaro;
+
+            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+
+            // === PANEL DERECHO CLARO (datos + línea + botones) ===
+            Color fondoClaro = EstilosUI.ColorFondoFormulario;
+
+            splitVentas.Panel2.BackColor = fondoClaro;
+            tblLeftVentas.BackColor = fondoClaro;
+            grpDatosVenta.BackColor = fondoClaro;
+            grpLinea.BackColor = fondoClaro;
+            tblDatosVenta.BackColor = fondoClaro;
+            tblLinea.BackColor = fondoClaro;
+            tableLayoutPanel1.BackColor = fondoClaro;   // donde están los 4 botones
+
+            grpDatosVenta.ForeColor = EstilosUI.ColorTextoOscuro;
+            grpLinea.ForeColor = EstilosUI.ColorTextoOscuro;
+
+            // === Fuentes coherentes en la parte derecha ===
+            Font fuenteLabels = new Font("Segoe UI", 9F, FontStyle.Regular);
+            Font fuenteInputs = new Font("Segoe UI", 9F, FontStyle.Regular);
+
+            grpDatosVenta.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grpLinea.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+
+            // Labels/controles en "Datos de la venta"
+            foreach (Control c in tblDatosVenta.Controls)
+            {
+                if (c is Label lbl)
+                {
+                    lbl.ForeColor = EstilosUI.ColorTextoOscuro;
+                    lbl.Font = fuenteLabels;
+                }
+                else if (c is ComboBox cmb)
+                {
+                    cmb.Font = fuenteInputs;
+                }
+            }
+
+            // Labels/controles en "Línea de producto"
+            foreach (Control c in tblLinea.Controls)
+            {
+                if (c is Label lbl)
+                {
+                    lbl.ForeColor = EstilosUI.ColorTextoOscuro;
+                    lbl.Font = fuenteLabels;
+                }
+                else if (c is TextBox txt)
+                {
+                    txt.Font = fuenteInputs;
+                }
+                else if (c is ComboBox cmb)
+                {
+                    cmb.Font = fuenteInputs;
+                }
+                else if (c is NumericUpDown nud)
+                {
+                    nud.Font = fuenteInputs;
+                }
+            }
+
+            // Inputs claros
+            txtPrecioUnitario.BackColor = Color.White;
+            txtPrecioUnitario.ForeColor = EstilosUI.ColorTextoOscuro;
+            txtPrecioUnitario.BorderStyle = BorderStyle.FixedSingle;
+
+            cmbCliente.BackColor = Color.White;
+            cmbCliente.ForeColor = EstilosUI.ColorTextoOscuro;
+            cmbCliente.FlatStyle = FlatStyle.Standard;
+            cmbCliente.Font = fuenteInputs;
+
+            cmbProducto.BackColor = Color.White;
+            cmbProducto.ForeColor = EstilosUI.ColorTextoOscuro;
+            cmbProducto.FlatStyle = FlatStyle.Standard;
+            cmbProducto.Font = fuenteInputs;
+
+            nudCantidad.BackColor = Color.White;
+            nudCantidad.ForeColor = EstilosUI.ColorTextoOscuro;
+
+            // === BOTONES ===
+            // Primarios: Agregar / Guardar
+            EstilosUI.AplicarEstiloBoton(btnAgregarLinea);
+            EstilosUI.AplicarEstiloBoton(btnGuardarVenta);
+
+            // Secundarios: Quitar / Cancelar
+            EstilosUI.AplicarEstiloBotonSecundario(btnQuitarLinea);
+            EstilosUI.AplicarEstiloBotonSecundario(btnCancelar);
+
+            // Que todos midan lo mismo y tengan separación
+            EstilosUI.AplicarBotonesCrud(btnAgregarLinea, btnQuitarLinea, btnGuardarVenta, btnCancelar);
         }
 
         private void FormVentas_Load(object sender, EventArgs e)
@@ -262,7 +371,5 @@ namespace GestorMovilChip
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
     }
 }

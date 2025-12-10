@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|c:\\users\\sadielsm\\source\\repos\\gestiontiendas\\gestormovilchip\\formmenuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|solutionrelative:gestormovilchip\\formmenuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|c:\\users\\sadielsm\\source\\repos\\gestiontiendas\\gestormovilchip\\formclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|solutionrelative:gestormovilchip\\formclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\gestormovilchip\\formproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|solutionrelative:gestormovilchip\\formproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\gestormovilchip\\formproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|solutionrelative:gestormovilchip\\formproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|c:\\users\\sadielsm\\source\\repos\\gestiontiendas\\gestormovilchip\\formclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|solutionrelative:gestormovilchip\\formclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{04F734C5-F024-4EC8-80D1-29C45BF83087}|GestorMovilChip\\GestorMovilChip.csproj|C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\gestormovilchip\\formmenuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,17 +22,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "FormMenuPrincipal.cs",
               "DocumentMoniker": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormMenuPrincipal.cs",
               "RelativeDocumentMoniker": "GestorMovilChip\\FormMenuPrincipal.cs",
               "ToolTip": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormMenuPrincipal.cs",
               "RelativeToolTip": "GestorMovilChip\\FormMenuPrincipal.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwD0AAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAgwDIAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-06T19:01:44.949Z",
               "IsPinned": true,
@@ -44,39 +40,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FormMenuPrincipal.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormMenuPrincipal.cs",
-              "RelativeDocumentMoniker": "GestorMovilChip\\FormMenuPrincipal.cs",
-              "ToolTip": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormMenuPrincipal.cs [Dise\u00F1o]",
-              "RelativeToolTip": "GestorMovilChip\\FormMenuPrincipal.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-06T19:01:15.552Z",
-              "IsPinned": true,
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FormProductos.cs",
-              "DocumentMoniker": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormProductos.cs",
-              "RelativeDocumentMoniker": "GestorMovilChip\\FormProductos.cs",
-              "ToolTip": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormProductos.cs",
-              "RelativeToolTip": "GestorMovilChip\\FormProductos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA1AAAAAAAAAA==",
+              "Title": "FormClientes.cs",
+              "DocumentMoniker": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormClientes.cs",
+              "RelativeDocumentMoniker": "GestorMovilChip\\FormClientes.cs",
+              "ToolTip": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormClientes.cs*",
+              "RelativeToolTip": "GestorMovilChip\\FormClientes.cs*",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAowBsAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T00:04:12.893Z"
+              "WhenOpened": "2025-12-10T01:39:12.733Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FormProductos.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormProductos.cs",
-              "RelativeDocumentMoniker": "GestorMovilChip\\FormProductos.cs",
-              "ToolTip": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormProductos.cs [Dise\u00F1o]",
-              "RelativeToolTip": "GestorMovilChip\\FormProductos.cs [Dise\u00F1o]",
+              "DocumentIndex": 0,
+              "Title": "FormClientes.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormClientes.cs",
+              "RelativeDocumentMoniker": "GestorMovilChip\\FormClientes.cs",
+              "ToolTip": "C:\\Users\\SadielSM\\source\\repos\\GestionTiendas\\GestorMovilChip\\FormClientes.cs [Dise\u00F1o]*",
+              "RelativeToolTip": "GestorMovilChip\\FormClientes.cs [Dise\u00F1o]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T00:04:09.658Z"
+              "WhenOpened": "2025-12-09T19:44:36.576Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }

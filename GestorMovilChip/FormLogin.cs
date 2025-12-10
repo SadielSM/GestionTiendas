@@ -17,6 +17,11 @@ namespace GestorMovilChip
         public FormLogin()
         {
             InitializeComponent();
+
+            EstilosUI.AplicarEstiloFormulario(this);
+            this.BackColor = EstilosUI.ColorPrincipal; // fondo azul
+
+            EstilosUI.AplicarEstiloBoton(btnLogin);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -78,6 +83,20 @@ namespace GestorMovilChip
 
         }
 
+        private void CentrarPanel()
+        {
+            panelLogin.Left = (this.ClientSize.Width - panelLogin.Width) / 2;
+            panelLogin.Top = (this.ClientSize.Height - panelLogin.Height) / 2;
+        }
 
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+            CentrarPanel();
+        }
+
+        private void FormLogin_Resize(object sender, EventArgs e)
+        {
+            CentrarPanel();
+        }
     }
 }

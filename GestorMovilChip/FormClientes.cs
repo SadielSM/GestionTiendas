@@ -19,6 +19,67 @@ namespace GestorMovilChip
         public FormClientes()
         {
             InitializeComponent();
+
+            // Ventana fija como el resto
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            // ===== FONDO OSCURO GENERAL (misma línea que el resto) =====
+            EstilosUI.AplicarEstiloFormularioOscuro(this);
+
+            // ===== GRID IZQUIERDO (LISTADO) =====
+            EstilosUI.AplicarEstiloDataGridView(dgvClientes);
+            dgvClientes.BackgroundColor = EstilosUI.ColorFondoOscuro;
+            splitContainer1.Panel1.BackColor = EstilosUI.ColorFondoOscuro;
+
+            // ===== ZONA DERECHA CLARITA (FICHA CLIENTE) =====
+            Color fondoClaro = EstilosUI.ColorFondoFormulario;
+
+            splitContainer1.Panel2.BackColor = fondoClaro;
+            grpDatosCliente.BackColor = fondoClaro;
+            tblDatosCliente.BackColor = fondoClaro;
+            tableLayoutPanel1.BackColor = fondoClaro;  // panel botones arriba (Nuevo / Eliminar)
+            tableLayoutPanel2.BackColor = fondoClaro;  // panel botones abajo (Guardar / Cancelar)
+
+            grpDatosCliente.ForeColor = EstilosUI.ColorTextoOscuro;
+            grpDatosCliente.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+
+            // ===== FUENTES Y COLORES DE LABELS / TEXTBOX =====
+            Font fuenteLabels = new Font("Segoe UI", 9F, FontStyle.Regular);
+            Font fuenteInputs = new Font("Segoe UI", 9F, FontStyle.Regular);
+
+            foreach (Control c in tblDatosCliente.Controls)
+            {
+                if (c is Label lbl)
+                {
+                    lbl.ForeColor = EstilosUI.ColorTextoOscuro;
+                    lbl.Font = fuenteLabels;
+                }
+                else if (c is TextBox txt)
+                {
+                    txt.Font = fuenteInputs;
+                    txt.BackColor = Color.White;
+                    txt.ForeColor = EstilosUI.ColorTextoOscuro;
+                    txt.BorderStyle = BorderStyle.FixedSingle;
+                }
+            }
+
+            // Por si el label de Buscar está fuera del foreach
+            lblBuscarCli.Font = fuenteLabels;
+            lblBuscarCli.ForeColor = EstilosUI.ColorTextoOscuro;
+
+            // ===== BOTONES =====
+            // Primarios
+            EstilosUI.AplicarEstiloBoton(btnNuevo);
+            EstilosUI.AplicarEstiloBoton(btnGuardar);
+
+            // Secundarios
+            EstilosUI.AplicarEstiloBotonSecundario(btnEliminar);
+            EstilosUI.AplicarEstiloBotonSecundario(btnCancelar);
+
+            // Todos con mismo tamaño / margen
+            EstilosUI.AplicarBotonesCrud(btnNuevo, btnGuardar, btnEliminar, btnCancelar);
+
         }
 
         private void FormClientes_Load(object sender, EventArgs e)

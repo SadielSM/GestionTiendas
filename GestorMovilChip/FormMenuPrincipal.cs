@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestorMovilChip.Clase;
+using GestorMovilChip.Datos;
 using MySql.Data.MySqlClient;
 
 
@@ -22,33 +23,37 @@ namespace GestorMovilChip
         public FormMenuPrincipal(int idUsuario, string nombreUsuario, string rolUsuario)
         {
             InitializeComponent();
-           
+
             this.idUsuario = idUsuario;
             this.nombreUsuario = nombreUsuario;
             this.rolUsuario = rolUsuario;
 
             EstilosUI.AplicarEstiloFormulario(this);
 
-            // Paneles
             panelTop.BackColor = EstilosUI.ColorPanel;
-            panelLeft.BackColor = Color.FromArgb(40, 40, 55);
+            panelLeft.BackColor = Color.FromArgb(25, 25, 40);
 
-            // Títulos
             EstilosUI.AplicarEstiloLabelTitulo(lblTituloApp);
             lblTituloApp.ForeColor = EstilosUI.ColorTextoClaro;
-
             lblUsuarioLogueado.ForeColor = EstilosUI.ColorTextoClaro;
 
-            // Botones del menú lateral
-            EstilosUI.AplicarEstiloBoton(btnProductos);
-            EstilosUI.AplicarEstiloBoton(btnCategorias);
-            EstilosUI.AplicarEstiloBoton(btnClientes);
-            EstilosUI.AplicarEstiloBoton(btnVentas);
-            EstilosUI.AplicarEstiloBoton(btnListadoVentas);
+            EstilosUI.AplicarEstiloBotonMenu(btnCategorias);
+            EstilosUI.AplicarEstiloBotonMenu(btnProductos);
+            EstilosUI.AplicarEstiloBotonMenu(btnVentas);
+            EstilosUI.AplicarEstiloBotonMenu(btnListadoVentas);
+            EstilosUI.AplicarEstiloBotonMenu(btnClientes);
 
-            // Si tienes un botón de salir:
-            // EstilosUI.AplicarEstiloBotonSecundario(btnSalir);
+            EstilosUI.AplicarEstiloCard(panelCardHoy);
+            EstilosUI.AplicarEstiloCard(panelCardMes);
+            EstilosUI.AplicarEstiloCard(panelCardStock);
+            EstilosUI.AplicarEstiloDataGridView(dgvUltimasVentas);
+            EstilosUI.AplicarEstiloBotonSecundario(btnRefrescarDashboard);
+            EstilosUI.AplicarEstiloGroupBox(grpUltimasVentas);
+
+
+
         }
+
 
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
         {
@@ -105,6 +110,7 @@ namespace GestorMovilChip
             CargarVentasHoy();
             CargarVentasMes();
             CargarProductosStockBajo();
+            CargarUltimasVentas();
         }
 
         private void CargarVentasHoy()
@@ -249,5 +255,51 @@ namespace GestorMovilChip
             Console.Write(Seguridad.CalcularHash("1234"));
              MessageBox.Show(Seguridad.CalcularHash("1234"));
         }
+
+        private void CargarUltimasVentas(int maxFilas = 10)
+        {
+            try
+            {
+                var lista = VentaDAO.ObtenerVentas(); // ya la tenemos hecha
+
+                // Si quieres solo las 10 primeras:
+                if (lista.Count > maxFilas)
+                {
+                    lista = lista.GetRange(0, maxFilas);
+                }
+
+                dgvUltimasVentas.DataSource = null;
+                dgvUltimasVentas.DataSource = lista;
+
+                ConfigurarGridUltimasVentas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar últimas ventas:\n" + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ConfigurarGridUltimasVentas()
+        {
+            if (dgvUltimasVentas.Columns.Count > 0)
+            {
+                dgvUltimasVentas.Columns["IdVenta"].HeaderText = "ID";
+                dgvUltimasVentas.Columns["Fecha"].HeaderText = "Fecha";
+                dgvUltimasVentas.Columns["NombreCliente"].HeaderText = "Cliente";
+                dgvUltimasVentas.Columns["NombreUsuario"].HeaderText = "Usuario";
+                dgvUltimasVentas.Columns["Total"].HeaderText = "Total";
+
+                // ocultamos lo que no haga falta
+                if (dgvUltimasVentas.Columns["IdCliente"] != null)
+                    dgvUltimasVentas.Columns["IdCliente"].Visible = false;
+                if (dgvUltimasVentas.Columns["IdUsuario"] != null)
+                    dgvUltimasVentas.Columns["IdUsuario"].Visible = false;
+
+                dgvUltimasVentas.Columns["IdVenta"].Width = 60;
+                dgvUltimasVentas.Columns["Total"].Width = 80;
+            }
+        }
+
     }
 }

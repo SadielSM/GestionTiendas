@@ -19,15 +19,41 @@ namespace GestorMovilChip
         public FormProductos()
         {
             InitializeComponent();
-            EstilosUI.AplicarEstiloFormulario(this);
 
-            EstilosUI.AplicarEstiloDataGridView(dgvProductos);
-            EstilosUI.AplicarEstiloBoton(btnNuevo);
-            EstilosUI.AplicarEstiloBoton(btnGuardar);
-            EstilosUI.AplicarEstiloBotonSecundario(btnEliminar);
-            EstilosUI.AplicarEstiloBotonSecundario(btnCancelar);
+            EstilosUI.AplicarPantallaCrudOscuroConDetalleClaro(
+                  form: this,
+                  textoTitulo: "Gestión de productos",
+                  dgv: dgvProductos,
+                  splitContainer: splitProductos,
+                  grpDatos: grpDatosProducto,
+                  panelBusqueda: panelBusqueda,
+                  tblCampos: tblCamposProducto,
+                  panelBotones: panelBotones,
+                  lblBuscar: lblBuscarProducto,
+                  chkActivo: chkActivo,
+                  cajasTexto: new TextBox[]
+                  {
+                      txtIdProducto,
+                      txtNombre,
+                      txtDescripcion,
+                      txtPrecioCompra,
+                      txtPrecioVenta,
+                      txtStock,
+                      txtCodigoBarras,
+                      txtBuscarProducto
+                  },
+                  comboCategoria: cmbCategoria,
+                  btnNuevo: btnNuevo,
+                  btnGuardar: btnGuardar,
+                  btnEliminar: btnEliminar,
+                  btnCancelar: btnCancelar
+              );
+
+            EstilosUI.AplicarBotonesCrud(btnNuevo, btnGuardar, btnEliminar, btnCancelar);
+
 
         }
+
 
         private void FormProductos_Load(object sender, EventArgs e)
         {
@@ -341,6 +367,61 @@ namespace GestorMovilChip
         {
             string texto = txtBuscarProducto.Text.Trim();
             CargarProductos(texto);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grpDatosProducto_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTituloProductos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBuscarProducto_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -108,7 +108,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvDetalle);
             this.Controls.Add(this.dgvVentas);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormListadoVentas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormListadoVentas";
             this.Load += new System.EventHandler(this.FormListadoVentas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();

@@ -39,7 +39,19 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.splitCategorias = new System.Windows.Forms.SplitContainer();
+            this.grpDatosCategoria = new System.Windows.Forms.GroupBox();
+            this.tblDatosCategoria = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitCategorias)).BeginInit();
+            this.splitCategorias.Panel1.SuspendLayout();
+            this.splitCategorias.Panel2.SuspendLayout();
+            this.splitCategorias.SuspendLayout();
+            this.grpDatosCategoria.SuspendLayout();
+            this.tblDatosCategoria.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCategorias
@@ -48,70 +60,80 @@
             this.dgvCategorias.AllowUserToDeleteRows = false;
             this.dgvCategorias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategorias.Location = new System.Drawing.Point(436, 13);
+            this.dgvCategorias.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCategorias.Location = new System.Drawing.Point(0, 0);
             this.dgvCategorias.MultiSelect = false;
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.ReadOnly = true;
             this.dgvCategorias.RowHeadersWidth = 51;
             this.dgvCategorias.RowTemplate.Height = 24;
             this.dgvCategorias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategorias.Size = new System.Drawing.Size(352, 425);
+            this.dgvCategorias.Size = new System.Drawing.Size(1007, 740);
             this.dgvCategorias.TabIndex = 0;
             this.dgvCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategorias_CellClick);
             // 
             // lblID
             // 
             this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(136, 89);
+            this.lblID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblID.Location = new System.Drawing.Point(3, 0);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(20, 16);
+            this.lblID.Size = new System.Drawing.Size(153, 42);
             this.lblID.TabIndex = 1;
             this.lblID.Text = "ID";
+            this.lblID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(254, 86);
+            this.txtId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtId.Location = new System.Drawing.Point(162, 10);
             this.txtId.Name = "txtId";
             this.txtId.ReadOnly = true;
-            this.txtId.Size = new System.Drawing.Size(100, 22);
+            this.txtId.Size = new System.Drawing.Size(154, 22);
             this.txtId.TabIndex = 2;
             // 
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(136, 142);
+            this.lblNombre.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblNombre.Location = new System.Drawing.Point(3, 42);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(56, 16);
+            this.lblNombre.Size = new System.Drawing.Size(153, 42);
             this.lblNombre.TabIndex = 3;
             this.lblNombre.Text = "Nombre";
+            this.lblNombre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(254, 142);
+            this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNombre.Location = new System.Drawing.Point(162, 52);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 22);
+            this.txtNombre.Size = new System.Drawing.Size(154, 22);
             this.txtNombre.TabIndex = 4;
             // 
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(136, 198);
+            this.lblDescripcion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDescripcion.Location = new System.Drawing.Point(3, 84);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(79, 16);
+            this.lblDescripcion.Size = new System.Drawing.Size(153, 44);
             this.lblDescripcion.TabIndex = 5;
             this.lblDescripcion.Text = "Descripción";
+            this.lblDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(254, 192);
+            this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescripcion.Location = new System.Drawing.Point(162, 95);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(123, 22);
+            this.txtDescripcion.Size = new System.Drawing.Size(154, 22);
             this.txtDescripcion.TabIndex = 6;
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new System.Drawing.Point(204, 275);
+            this.btnNuevo.Location = new System.Drawing.Point(151, 421);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(71, 28);
             this.btnNuevo.TabIndex = 7;
@@ -121,7 +143,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(204, 309);
+            this.btnGuardar.Location = new System.Drawing.Point(204, 482);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(71, 28);
             this.btnGuardar.TabIndex = 8;
@@ -131,7 +153,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(306, 275);
+            this.btnEliminar.Location = new System.Drawing.Point(38, 421);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(71, 28);
             this.btnEliminar.TabIndex = 9;
@@ -141,7 +163,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(306, 309);
+            this.btnCancelar.Location = new System.Drawing.Point(242, 421);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(71, 28);
             this.btnCancelar.TabIndex = 10;
@@ -149,28 +171,99 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // splitCategorias
+            // 
+            this.splitCategorias.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitCategorias.Location = new System.Drawing.Point(0, 0);
+            this.splitCategorias.Name = "splitCategorias";
+            // 
+            // splitCategorias.Panel1
+            // 
+            this.splitCategorias.Panel1.Controls.Add(this.dgvCategorias);
+            // 
+            // splitCategorias.Panel2
+            // 
+            this.splitCategorias.Panel2.Controls.Add(this.grpDatosCategoria);
+            this.splitCategorias.Size = new System.Drawing.Size(1336, 740);
+            this.splitCategorias.SplitterDistance = 1007;
+            this.splitCategorias.TabIndex = 11;
+            // 
+            // grpDatosCategoria
+            // 
+            this.grpDatosCategoria.Controls.Add(this.panel1);
+            this.grpDatosCategoria.Controls.Add(this.tblDatosCategoria);
+            this.grpDatosCategoria.Controls.Add(this.btnGuardar);
+            this.grpDatosCategoria.Controls.Add(this.btnCancelar);
+            this.grpDatosCategoria.Controls.Add(this.btnEliminar);
+            this.grpDatosCategoria.Controls.Add(this.btnNuevo);
+            this.grpDatosCategoria.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpDatosCategoria.Location = new System.Drawing.Point(0, 0);
+            this.grpDatosCategoria.Name = "grpDatosCategoria";
+            this.grpDatosCategoria.Size = new System.Drawing.Size(325, 740);
+            this.grpDatosCategoria.TabIndex = 0;
+            this.grpDatosCategoria.TabStop = false;
+            this.grpDatosCategoria.Text = "Datos de la categoría";
+            // 
+            // tblDatosCategoria
+            // 
+            this.tblDatosCategoria.ColumnCount = 2;
+            this.tblDatosCategoria.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblDatosCategoria.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblDatosCategoria.Controls.Add(this.lblID, 0, 0);
+            this.tblDatosCategoria.Controls.Add(this.txtId, 1, 0);
+            this.tblDatosCategoria.Controls.Add(this.lblNombre, 0, 1);
+            this.tblDatosCategoria.Controls.Add(this.txtDescripcion, 1, 2);
+            this.tblDatosCategoria.Controls.Add(this.txtNombre, 1, 1);
+            this.tblDatosCategoria.Controls.Add(this.lblDescripcion, 0, 2);
+            this.tblDatosCategoria.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tblDatosCategoria.Location = new System.Drawing.Point(3, 18);
+            this.tblDatosCategoria.Name = "tblDatosCategoria";
+            this.tblDatosCategoria.RowCount = 3;
+            this.tblDatosCategoria.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblDatosCategoria.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblDatosCategoria.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblDatosCategoria.Size = new System.Drawing.Size(319, 128);
+            this.tblDatosCategoria.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(3, 559);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(319, 178);
+            this.panel1.TabIndex = 11;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(319, 178);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
             // FormCategorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.btnNuevo);
-            this.Controls.Add(this.txtDescripcion);
-            this.Controls.Add(this.lblDescripcion);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.txtId);
-            this.Controls.Add(this.lblID);
-            this.Controls.Add(this.dgvCategorias);
+            this.ClientSize = new System.Drawing.Size(1336, 740);
+            this.Controls.Add(this.splitCategorias);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormCategorias";
-            this.Text = "FormCategorias";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Gestión de Categorías";
             this.Load += new System.EventHandler(this.FormCategorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
+            this.splitCategorias.Panel1.ResumeLayout(false);
+            this.splitCategorias.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitCategorias)).EndInit();
+            this.splitCategorias.ResumeLayout(false);
+            this.grpDatosCategoria.ResumeLayout(false);
+            this.tblDatosCategoria.ResumeLayout(false);
+            this.tblDatosCategoria.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -187,5 +280,10 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.SplitContainer splitCategorias;
+        private System.Windows.Forms.GroupBox grpDatosCategoria;
+        private System.Windows.Forms.TableLayoutPanel tblDatosCategoria;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
