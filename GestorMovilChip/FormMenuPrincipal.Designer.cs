@@ -46,23 +46,23 @@
             this.panelLeft = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panelDashboard = new System.Windows.Forms.Panel();
-            this.tblDashboard = new System.Windows.Forms.TableLayoutPanel();
-            this.panelCardHoy = new System.Windows.Forms.Panel();
-            this.panelCardMes = new System.Windows.Forms.Panel();
-            this.panelCardStock = new System.Windows.Forms.Panel();
+            this.tblMainDashboard = new System.Windows.Forms.TableLayoutPanel();
             this.grpUltimasVentas = new System.Windows.Forms.GroupBox();
             this.dgvUltimasVentas = new System.Windows.Forms.DataGridView();
-            this.tblMainDashboard = new System.Windows.Forms.TableLayoutPanel();
+            this.tblDashboard = new System.Windows.Forms.TableLayoutPanel();
+            this.panelCardStock = new System.Windows.Forms.Panel();
+            this.panelCardMes = new System.Windows.Forms.Panel();
+            this.panelCardHoy = new System.Windows.Forms.Panel();
             this.panelTop.SuspendLayout();
             this.panelLeft.SuspendLayout();
             this.panelDashboard.SuspendLayout();
-            this.tblDashboard.SuspendLayout();
-            this.panelCardHoy.SuspendLayout();
-            this.panelCardMes.SuspendLayout();
-            this.panelCardStock.SuspendLayout();
+            this.tblMainDashboard.SuspendLayout();
             this.grpUltimasVentas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUltimasVentas)).BeginInit();
-            this.tblMainDashboard.SuspendLayout();
+            this.tblDashboard.SuspendLayout();
+            this.panelCardStock.SuspendLayout();
+            this.panelCardMes.SuspendLayout();
+            this.panelCardHoy.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUsuarioLogueado
@@ -198,9 +198,9 @@
             this.lblTituloStockBajo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTituloStockBajo.Location = new System.Drawing.Point(0, 0);
             this.lblTituloStockBajo.Name = "lblTituloStockBajo";
-            this.lblTituloStockBajo.Size = new System.Drawing.Size(307, 28);
+            this.lblTituloStockBajo.Size = new System.Drawing.Size(255, 28);
             this.lblTituloStockBajo.TabIndex = 10;
-            this.lblTituloStockBajo.Text = "Productos con stock bajo (< 5):";
+            this.lblTituloStockBajo.Text = "Productos con stock bajo:";
             // 
             // lblStockBajo
             // 
@@ -209,9 +209,9 @@
             this.lblStockBajo.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStockBajo.Location = new System.Drawing.Point(0, 28);
             this.lblStockBajo.Name = "lblStockBajo";
-            this.lblStockBajo.Size = new System.Drawing.Size(126, 54);
+            this.lblStockBajo.Size = new System.Drawing.Size(46, 54);
             this.lblStockBajo.TabIndex = 11;
-            this.lblStockBajo.Text = "0.00€";
+            this.lblStockBajo.Text = "0";
             // 
             // btnRefrescarDashboard
             // 
@@ -279,53 +279,20 @@
             this.panelDashboard.Size = new System.Drawing.Size(1136, 617);
             this.panelDashboard.TabIndex = 16;
             // 
-            // tblDashboard
+            // tblMainDashboard
             // 
-            this.tblDashboard.ColumnCount = 3;
-            this.tblDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tblDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tblDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tblDashboard.Controls.Add(this.panelCardStock, 2, 0);
-            this.tblDashboard.Controls.Add(this.panelCardMes, 1, 0);
-            this.tblDashboard.Controls.Add(this.panelCardHoy, 0, 0);
-            this.tblDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblDashboard.Location = new System.Drawing.Point(3, 3);
-            this.tblDashboard.Name = "tblDashboard";
-            this.tblDashboard.RowCount = 2;
-            this.tblDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.4023F));
-            this.tblDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.597701F));
-            this.tblDashboard.Size = new System.Drawing.Size(1130, 174);
-            this.tblDashboard.TabIndex = 13;
-            // 
-            // panelCardHoy
-            // 
-            this.panelCardHoy.Controls.Add(this.lblVentasHoy);
-            this.panelCardHoy.Controls.Add(this.lblTituloVentasHoy);
-            this.panelCardHoy.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCardHoy.Location = new System.Drawing.Point(3, 3);
-            this.panelCardHoy.Name = "panelCardHoy";
-            this.panelCardHoy.Size = new System.Drawing.Size(370, 160);
-            this.panelCardHoy.TabIndex = 0;
-            // 
-            // panelCardMes
-            // 
-            this.panelCardMes.Controls.Add(this.lblVentasMes);
-            this.panelCardMes.Controls.Add(this.lblTituloVentasMes);
-            this.panelCardMes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCardMes.Location = new System.Drawing.Point(379, 3);
-            this.panelCardMes.Name = "panelCardMes";
-            this.panelCardMes.Size = new System.Drawing.Size(370, 160);
-            this.panelCardMes.TabIndex = 1;
-            // 
-            // panelCardStock
-            // 
-            this.panelCardStock.Controls.Add(this.lblStockBajo);
-            this.panelCardStock.Controls.Add(this.lblTituloStockBajo);
-            this.panelCardStock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCardStock.Location = new System.Drawing.Point(755, 3);
-            this.panelCardStock.Name = "panelCardStock";
-            this.panelCardStock.Size = new System.Drawing.Size(372, 160);
-            this.panelCardStock.TabIndex = 2;
+            this.tblMainDashboard.ColumnCount = 1;
+            this.tblMainDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMainDashboard.Controls.Add(this.grpUltimasVentas, 0, 1);
+            this.tblMainDashboard.Controls.Add(this.tblDashboard, 0, 0);
+            this.tblMainDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblMainDashboard.Location = new System.Drawing.Point(0, 0);
+            this.tblMainDashboard.Name = "tblMainDashboard";
+            this.tblMainDashboard.RowCount = 2;
+            this.tblMainDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tblMainDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMainDashboard.Size = new System.Drawing.Size(1136, 617);
+            this.tblMainDashboard.TabIndex = 14;
             // 
             // grpUltimasVentas
             // 
@@ -355,20 +322,53 @@
             this.dgvUltimasVentas.Size = new System.Drawing.Size(1124, 405);
             this.dgvUltimasVentas.TabIndex = 0;
             // 
-            // tblMainDashboard
+            // tblDashboard
             // 
-            this.tblMainDashboard.ColumnCount = 1;
-            this.tblMainDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMainDashboard.Controls.Add(this.grpUltimasVentas, 0, 1);
-            this.tblMainDashboard.Controls.Add(this.tblDashboard, 0, 0);
-            this.tblMainDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblMainDashboard.Location = new System.Drawing.Point(0, 0);
-            this.tblMainDashboard.Name = "tblMainDashboard";
-            this.tblMainDashboard.RowCount = 2;
-            this.tblMainDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tblMainDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMainDashboard.Size = new System.Drawing.Size(1136, 617);
-            this.tblMainDashboard.TabIndex = 14;
+            this.tblDashboard.ColumnCount = 3;
+            this.tblDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tblDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tblDashboard.Controls.Add(this.panelCardStock, 2, 0);
+            this.tblDashboard.Controls.Add(this.panelCardMes, 1, 0);
+            this.tblDashboard.Controls.Add(this.panelCardHoy, 0, 0);
+            this.tblDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblDashboard.Location = new System.Drawing.Point(3, 3);
+            this.tblDashboard.Name = "tblDashboard";
+            this.tblDashboard.RowCount = 2;
+            this.tblDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.4023F));
+            this.tblDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.597701F));
+            this.tblDashboard.Size = new System.Drawing.Size(1130, 174);
+            this.tblDashboard.TabIndex = 13;
+            // 
+            // panelCardStock
+            // 
+            this.panelCardStock.Controls.Add(this.lblStockBajo);
+            this.panelCardStock.Controls.Add(this.lblTituloStockBajo);
+            this.panelCardStock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCardStock.Location = new System.Drawing.Point(755, 3);
+            this.panelCardStock.Name = "panelCardStock";
+            this.panelCardStock.Size = new System.Drawing.Size(372, 160);
+            this.panelCardStock.TabIndex = 2;
+            // 
+            // panelCardMes
+            // 
+            this.panelCardMes.Controls.Add(this.lblVentasMes);
+            this.panelCardMes.Controls.Add(this.lblTituloVentasMes);
+            this.panelCardMes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCardMes.Location = new System.Drawing.Point(379, 3);
+            this.panelCardMes.Name = "panelCardMes";
+            this.panelCardMes.Size = new System.Drawing.Size(370, 160);
+            this.panelCardMes.TabIndex = 1;
+            // 
+            // panelCardHoy
+            // 
+            this.panelCardHoy.Controls.Add(this.lblVentasHoy);
+            this.panelCardHoy.Controls.Add(this.lblTituloVentasHoy);
+            this.panelCardHoy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCardHoy.Location = new System.Drawing.Point(3, 3);
+            this.panelCardHoy.Name = "panelCardHoy";
+            this.panelCardHoy.Size = new System.Drawing.Size(370, 160);
+            this.panelCardHoy.TabIndex = 0;
             // 
             // FormMenuPrincipal
             // 
@@ -393,16 +393,16 @@
             this.panelLeft.ResumeLayout(false);
             this.panelLeft.PerformLayout();
             this.panelDashboard.ResumeLayout(false);
-            this.tblDashboard.ResumeLayout(false);
-            this.panelCardHoy.ResumeLayout(false);
-            this.panelCardHoy.PerformLayout();
-            this.panelCardMes.ResumeLayout(false);
-            this.panelCardMes.PerformLayout();
-            this.panelCardStock.ResumeLayout(false);
-            this.panelCardStock.PerformLayout();
+            this.tblMainDashboard.ResumeLayout(false);
             this.grpUltimasVentas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUltimasVentas)).EndInit();
-            this.tblMainDashboard.ResumeLayout(false);
+            this.tblDashboard.ResumeLayout(false);
+            this.panelCardStock.ResumeLayout(false);
+            this.panelCardStock.PerformLayout();
+            this.panelCardMes.ResumeLayout(false);
+            this.panelCardMes.PerformLayout();
+            this.panelCardHoy.ResumeLayout(false);
+            this.panelCardHoy.PerformLayout();
             this.ResumeLayout(false);
 
         }

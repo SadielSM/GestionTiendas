@@ -83,6 +83,17 @@ namespace GestorMovilChip
 
         }
 
+        private void linkOlvido_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show(
+                "Si has olvidado la contraseña, ponte en contacto con el administrador de la tienda para que te la restablezca.",
+                "Contraseña olvidada",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
+
         private void CentrarPanel()
         {
             panelLogin.Left = (this.ClientSize.Width - panelLogin.Width) / 2;

@@ -41,17 +41,18 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.splitCategorias = new System.Windows.Forms.SplitContainer();
             this.grpDatosCategoria = new System.Windows.Forms.GroupBox();
+            this.panelBotonesCat = new System.Windows.Forms.Panel();
             this.tblDatosCategoria = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitCategorias)).BeginInit();
             this.splitCategorias.Panel1.SuspendLayout();
             this.splitCategorias.Panel2.SuspendLayout();
             this.splitCategorias.SuspendLayout();
             this.grpDatosCategoria.SuspendLayout();
+            this.panelBotonesCat.SuspendLayout();
             this.tblDatosCategoria.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCategorias
@@ -133,9 +134,10 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new System.Drawing.Point(151, 421);
+            this.btnNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuevo.Location = new System.Drawing.Point(3, 30);
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(71, 28);
+            this.btnNuevo.Size = new System.Drawing.Size(153, 28);
             this.btnNuevo.TabIndex = 7;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
@@ -143,9 +145,10 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(204, 482);
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.Location = new System.Drawing.Point(162, 30);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(71, 28);
+            this.btnGuardar.Size = new System.Drawing.Size(154, 28);
             this.btnGuardar.TabIndex = 8;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -153,9 +156,11 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(38, 421);
+            this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEliminar.Location = new System.Drawing.Point(3, 92);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(71, 28);
+            this.btnEliminar.Size = new System.Drawing.Size(153, 28);
             this.btnEliminar.TabIndex = 9;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -163,9 +168,11 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(242, 421);
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.Location = new System.Drawing.Point(162, 92);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(71, 28);
+            this.btnCancelar.Size = new System.Drawing.Size(154, 28);
             this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -190,12 +197,8 @@
             // 
             // grpDatosCategoria
             // 
-            this.grpDatosCategoria.Controls.Add(this.panel1);
+            this.grpDatosCategoria.Controls.Add(this.panelBotonesCat);
             this.grpDatosCategoria.Controls.Add(this.tblDatosCategoria);
-            this.grpDatosCategoria.Controls.Add(this.btnGuardar);
-            this.grpDatosCategoria.Controls.Add(this.btnCancelar);
-            this.grpDatosCategoria.Controls.Add(this.btnEliminar);
-            this.grpDatosCategoria.Controls.Add(this.btnNuevo);
             this.grpDatosCategoria.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpDatosCategoria.Location = new System.Drawing.Point(0, 0);
             this.grpDatosCategoria.Name = "grpDatosCategoria";
@@ -203,6 +206,15 @@
             this.grpDatosCategoria.TabIndex = 0;
             this.grpDatosCategoria.TabStop = false;
             this.grpDatosCategoria.Text = "Datos de la categoría";
+            // 
+            // panelBotonesCat
+            // 
+            this.panelBotonesCat.Controls.Add(this.tableLayoutPanel1);
+            this.panelBotonesCat.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBotonesCat.Location = new System.Drawing.Point(3, 559);
+            this.panelBotonesCat.Name = "panelBotonesCat";
+            this.panelBotonesCat.Size = new System.Drawing.Size(319, 178);
+            this.panelBotonesCat.TabIndex = 11;
             // 
             // tblDatosCategoria
             // 
@@ -225,22 +237,23 @@
             this.tblDatosCategoria.Size = new System.Drawing.Size(319, 128);
             this.tblDatosCategoria.TabIndex = 0;
             // 
-            // panel1
+            // tableLayoutPanel1
             // 
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 559);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(319, 178);
-            this.panel1.TabIndex = 11;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(319, 178);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnNuevo, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnEliminar, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnGuardar, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(319, 178);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // FormCategorias
             // 
@@ -260,9 +273,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitCategorias)).EndInit();
             this.splitCategorias.ResumeLayout(false);
             this.grpDatosCategoria.ResumeLayout(false);
+            this.panelBotonesCat.ResumeLayout(false);
             this.tblDatosCategoria.ResumeLayout(false);
             this.tblDatosCategoria.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -283,7 +297,7 @@
         private System.Windows.Forms.SplitContainer splitCategorias;
         private System.Windows.Forms.GroupBox grpDatosCategoria;
         private System.Windows.Forms.TableLayoutPanel tblDatosCategoria;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panelBotonesCat;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

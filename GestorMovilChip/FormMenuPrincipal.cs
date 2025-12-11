@@ -57,10 +57,8 @@ namespace GestorMovilChip
 
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
         {
-            // Puedes poner el nombre del usuario en el título
             this.Text = "Gestor Tienda - " + nombreUsuario + " (" + rolUsuario + ")";
 
-            // Si tienes un label de bienvenida:
             lblUsuarioLogueado.Text = "Bienvenido, " + nombreUsuario;
 
             CargarResumenDashboard();
@@ -69,39 +67,48 @@ namespace GestorMovilChip
 
         private void FormMenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // Si cierra el menú principal → cerramos toda la app
             Application.Exit();
+        }
+
+        private void AbrirFormularioModal(Form formulario)
+        {
+            this.Hide(); // ocultamos el menú principal
+
+            // Para que salga centrado respecto al menú
+            formulario.StartPosition = FormStartPosition.CenterParent;
+
+            using (formulario)
+            {
+                formulario.ShowDialog(this);
+            }
+
+            this.Show(); // al cerrar el hijo, volvemos a mostrar el menú
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)
         {
-            FormCategorias form = new FormCategorias();
-            form.ShowDialog(); // modal
+            AbrirFormularioModal(new FormCategorias());
         }
+       
 
         private void btnProductos_Click(object sender, EventArgs e)
         {
-            FormProductos form = new FormProductos();
-            form.ShowDialog();
+            AbrirFormularioModal(new FormProductos());
         }
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
-            // Ya tenemos idUsuario y nombreUsuario en este form
-            FormVentas form = new FormVentas(idUsuario, nombreUsuario);
-            form.ShowDialog();
+            AbrirFormularioModal(new FormVentas(idUsuario, nombreUsuario));
         }
 
         private void btnListadoVentas_Click(object sender, EventArgs e)
         {
-            FormListadoVentas form = new FormListadoVentas();
-            form.ShowDialog();
+            AbrirFormularioModal(new FormListadoVentas());
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
-            FormClientes form = new FormClientes();
-            form.ShowDialog();
+            AbrirFormularioModal(new FormClientes());
         }
 
         //CÓDIGO DEL DASHBOARD
@@ -243,12 +250,14 @@ namespace GestorMovilChip
             if (!EsAdmin)
             {
                 // un empleado NO puede ver el listado global de ventas
-                btnListadoVentas.Enabled = false;
-                // Lo podemos ocultar si queremos: 
-                // btnListadoVentas.Visible = false;
+                // btnListadoVentas.Enabled = false;
+                // Este es para ocultarlo del todo
+                 btnListadoVentas.Visible = false;
             }
         }
 
+        //Código que es para calcular el hash de una contraseña para un usuario
+        //Cosas de admin...
         private void button1_Click(object sender, EventArgs e)
         {
             //Calcular Hash
@@ -262,7 +271,7 @@ namespace GestorMovilChip
             {
                 var lista = VentaDAO.ObtenerVentas(); // ya la tenemos hecha
 
-                // Si quieres solo las 10 primeras:
+                // Solo las 10 primeras 
                 if (lista.Count > maxFilas)
                 {
                     lista = lista.GetRange(0, maxFilas);
@@ -290,7 +299,6 @@ namespace GestorMovilChip
                 dgvUltimasVentas.Columns["NombreUsuario"].HeaderText = "Usuario";
                 dgvUltimasVentas.Columns["Total"].HeaderText = "Total";
 
-                // ocultamos lo que no haga falta
                 if (dgvUltimasVentas.Columns["IdCliente"] != null)
                     dgvUltimasVentas.Columns["IdCliente"].Visible = false;
                 if (dgvUltimasVentas.Columns["IdUsuario"] != null)

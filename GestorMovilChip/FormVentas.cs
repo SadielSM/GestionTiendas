@@ -28,10 +28,10 @@ namespace GestorMovilChip
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
-            // === FONDO OSCURO GENERAL (como la pantalla principal) ===
+            // FONDO OSCURO GENERAL (como la pantalla principal) 
             EstilosUI.AplicarEstiloFormularioOscuro(this);
 
-            // === GRID IZQUIERDO (líneas de venta) ===
+            // GRID (líneas de venta) 
             EstilosUI.AplicarEstiloDataGridView(dgvLineas);
             dgvLineas.BackgroundColor = EstilosUI.ColorFondoOscuro;
 
@@ -40,13 +40,13 @@ namespace GestorMovilChip
             tableLayoutPanel3.BackColor = EstilosUI.ColorFondoOscuro; // fila del Total
 
             // Total abajo
-            label7.ForeColor = EstilosUI.ColorTextoClaro;  // "Total:"
+            label7.ForeColor = EstilosUI.ColorTextoClaro;  
             lblTotal.ForeColor = EstilosUI.ColorTextoClaro;
 
             label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
 
-            // === PANEL DERECHO CLARO (datos + línea + botones) ===
+            //  PANEL DERECHO CLARO (datos + línea + botones) 
             Color fondoClaro = EstilosUI.ColorFondoFormulario;
 
             splitVentas.Panel2.BackColor = fondoClaro;
@@ -55,12 +55,12 @@ namespace GestorMovilChip
             grpLinea.BackColor = fondoClaro;
             tblDatosVenta.BackColor = fondoClaro;
             tblLinea.BackColor = fondoClaro;
-            tableLayoutPanel1.BackColor = fondoClaro;   // donde están los 4 botones
+            tableLayoutPanel1.BackColor = fondoClaro;   
 
             grpDatosVenta.ForeColor = EstilosUI.ColorTextoOscuro;
             grpLinea.ForeColor = EstilosUI.ColorTextoOscuro;
 
-            // === Fuentes coherentes en la parte derecha ===
+            //  Fuentes coherentes en la parte derecha 
             Font fuenteLabels = new Font("Segoe UI", 9F, FontStyle.Regular);
             Font fuenteInputs = new Font("Segoe UI", 9F, FontStyle.Regular);
 
@@ -103,7 +103,6 @@ namespace GestorMovilChip
                 }
             }
 
-            // Inputs claros
             txtPrecioUnitario.BackColor = Color.White;
             txtPrecioUnitario.ForeColor = EstilosUI.ColorTextoOscuro;
             txtPrecioUnitario.BorderStyle = BorderStyle.FixedSingle;
@@ -121,7 +120,7 @@ namespace GestorMovilChip
             nudCantidad.BackColor = Color.White;
             nudCantidad.ForeColor = EstilosUI.ColorTextoOscuro;
 
-            // === BOTONES ===
+            //  BOTONES 
             // Primarios: Agregar / Guardar
             EstilosUI.AplicarEstiloBoton(btnAgregarLinea);
             EstilosUI.AplicarEstiloBoton(btnGuardarVenta);
@@ -130,7 +129,6 @@ namespace GestorMovilChip
             EstilosUI.AplicarEstiloBotonSecundario(btnQuitarLinea);
             EstilosUI.AplicarEstiloBotonSecundario(btnCancelar);
 
-            // Que todos midan lo mismo y tengan separación
             EstilosUI.AplicarBotonesCrud(btnAgregarLinea, btnQuitarLinea, btnGuardarVenta, btnCancelar);
         }
 
@@ -206,6 +204,51 @@ namespace GestorMovilChip
             dgvLineas.Columns["subtotal"].Width = 100;
         }
 
+        // Calcula stock disponible para el producto y ajusta el nudCantidad
+        private void ActualizarMaximoCantidad(Producto p)
+        {
+            if (p == null)
+            {
+                nudCantidad.Minimum = 0;
+                nudCantidad.Maximum = 0;
+                nudCantidad.Value = 0;
+                return;
+            }
+
+            // Cantidad ya añadida al carrito de ESTE producto
+            int cantidadEnGrid = 0;
+
+            foreach (DataGridViewRow fila in dgvLineas.Rows)
+            {
+                if (fila.IsNewRow) continue;
+
+                int idProdFila = Convert.ToInt32(fila.Cells["id_producto"].Value);
+                if (idProdFila == p.IdProducto)
+                {
+                    cantidadEnGrid += Convert.ToInt32(fila.Cells["cantidad"].Value);
+                }
+            }
+
+            int disponible = p.Stock - cantidadEnGrid;
+            if (disponible < 0) disponible = 0;
+
+            if (disponible == 0)
+            {
+                nudCantidad.Minimum = 0;
+                nudCantidad.Maximum = 0;
+                nudCantidad.Value = 0;
+            }
+            else
+            {
+                nudCantidad.Minimum = 1;
+                nudCantidad.Maximum = disponible;
+
+                if (nudCantidad.Value < 1 || nudCantidad.Value > disponible)
+                    nudCantidad.Value = 1;
+            }
+        }
+
+
         private void cmbProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             Producto p = cmbProducto.SelectedItem as Producto;
@@ -213,6 +256,12 @@ namespace GestorMovilChip
             if (p != null)
             {
                 txtPrecioUnitario.Text = p.PrecioVenta.ToString("0.00");
+                ActualizarMaximoCantidad(p);
+            }
+            else
+            {
+                txtPrecioUnitario.Text = "";
+                ActualizarMaximoCantidad(null);
             }
         }
 
@@ -226,7 +275,6 @@ namespace GestorMovilChip
                 return;
             }
 
-            // Ahora el combo trabaja con objetos Producto, no con DataRowView
             Producto p = cmbProducto.SelectedItem as Producto;
 
             if (p == null)
@@ -236,8 +284,26 @@ namespace GestorMovilChip
                 return;
             }
 
-            int idProducto = p.IdProducto;
-            string nombreProducto = p.Nombre;
+            int cantidad = (int)nudCantidad.Value;
+
+            if (cantidad <= 0)
+            {
+                MessageBox.Show("La cantidad debe ser mayor que 0.",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Stock disponible teniendo en cuenta lo que ya está en el grid
+            int disponible = (int)nudCantidad.Maximum;
+            if (cantidad > disponible)
+            {
+                MessageBox.Show(
+                    "No hay stock suficiente.\nStock disponible: " + disponible,
+                    "Stock insuficiente",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
 
             decimal precioUnitario;
             if (!decimal.TryParse(txtPrecioUnitario.Text.Trim(), out precioUnitario))
@@ -247,28 +313,40 @@ namespace GestorMovilChip
                 return;
             }
 
-            int cantidad = (int)nudCantidad.Value;
             decimal subtotal = precioUnitario * cantidad;
 
-            // Añadir fila al grid
             dgvLineas.Rows.Add(
-                idProducto,
-                nombreProducto,
+                p.IdProducto,
+                p.Nombre,
                 cantidad,
                 precioUnitario.ToString("0.00"),
                 subtotal.ToString("0.00")
             );
 
             CalcularTotal();
+
+            // actualizamos el máximo después de meter la línea
+            ActualizarMaximoCantidad(p);
         }
+
 
 
         private void btnQuitarLinea_Click(object sender, EventArgs e)
         {
-            if (dgvLineas.CurrentRow != null && dgvLineas.CurrentRow.Index >= 0)
+            if (dgvLineas.CurrentRow != null && !dgvLineas.CurrentRow.IsNewRow)
             {
                 dgvLineas.Rows.RemoveAt(dgvLineas.CurrentRow.Index);
                 CalcularTotal();
+
+                // Si hay un producto seleccionado, recalculamos su disponible
+                if (cmbProducto.SelectedItem is Producto p)
+                {
+                    ActualizarMaximoCantidad(p);
+                }
+                else
+                {
+                    ActualizarMaximoCantidad(null);
+                }
             }
             else
             {
@@ -276,6 +354,7 @@ namespace GestorMovilChip
                     "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private void CalcularTotal()
         {
@@ -301,16 +380,22 @@ namespace GestorMovilChip
             cmbCliente.SelectedIndex = -1;
             cmbProducto.SelectedIndex = -1;
             txtPrecioUnitario.Text = "";
-            nudCantidad.Value = 1;
             dgvLineas.Rows.Clear();
             lblTotal.Text = "0.00";
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+
+            // Reset del NumericUpDown 
+            nudCantidad.Minimum = 0;
+            nudCantidad.Maximum = 0;
+            nudCantidad.Value = 0;
         }
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarVenta();
         }
+
 
         private void btnGuardarVenta_Click(object sender, EventArgs e)
         {
@@ -370,6 +455,7 @@ namespace GestorMovilChip
                 MessageBox.Show("Error al guardar la venta:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }//del metodo guardar ventas
+
     }
 }

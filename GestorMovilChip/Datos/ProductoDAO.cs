@@ -187,7 +187,7 @@ namespace GestorMovilChip.Datos
             return ok;
         }
 
-        // Para el combo de ventas (productos activos)
+        // Para ventas (productos activos)
         public static List<Producto> ObtenerActivosParaVenta()
         {
             List<Producto> lista = new List<Producto>();
@@ -197,7 +197,7 @@ namespace GestorMovilChip.Datos
             {
                 conexion.Open();
 
-                string sql = "SELECT id_producto, nombre, precio_venta " +
+                string sql = "SELECT id_producto, nombre, precio_venta, stock " +
                              "FROM productos " +
                              "WHERE activo = 1 " +
                              "ORDER BY nombre";
@@ -211,6 +211,8 @@ namespace GestorMovilChip.Datos
                     p.IdProducto = reader.GetInt32("id_producto");
                     p.Nombre = reader.GetString("nombre");
                     p.PrecioVenta = reader.GetDecimal("precio_venta");
+                    p.Stock = reader.GetInt32("stock"); 
+
                     lista.Add(p);
                 }
 
@@ -227,5 +229,6 @@ namespace GestorMovilChip.Datos
 
             return lista;
         }
+
     }
 }

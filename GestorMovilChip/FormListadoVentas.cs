@@ -19,6 +19,32 @@ namespace GestorMovilChip
         public FormListadoVentas()
         {
             InitializeComponent();
+
+            // Fondo oscuro general
+            EstilosUI.AplicarEstiloFormularioOscuro(this);
+
+
+            // Grids en modo oscuro
+            EstilosUI.AplicarEstiloDataGridView(dgvVentas);
+            EstilosUI.AplicarEstiloDataGridView(dgvDetalle);
+
+            dgvVentas.BackgroundColor = EstilosUI.ColorFondoOscuro;
+            dgvDetalle.BackgroundColor = EstilosUI.ColorFondoOscuro;
+
+            // Panel central con fondo oscuro
+            this.BackColor = EstilosUI.ColorFondoOscuro;
+
+            panelBottom.BackColor = EstilosUI.ColorZonaOscura;
+
+            label1.ForeColor = EstilosUI.ColorTextoClaro;        // Total de venta
+            lblTotalVenta.ForeColor = EstilosUI.ColorPrincipal;   
+
+            // Botón actualizar 
+            EstilosUI.AplicarEstiloBoton(btnActualizar);
+
+            // Form fijo
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private void FormListadoVentas_Load(object sender, EventArgs e)

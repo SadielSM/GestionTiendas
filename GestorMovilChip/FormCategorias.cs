@@ -19,6 +19,67 @@ namespace GestorMovilChip
         public FormCategorias()
         {
             InitializeComponent();
+
+            EstilosUI.AplicarEstiloFormularioOscuro(this);
+
+            EstilosUI.AplicarEstiloDataGridView(dgvCategorias);
+            dgvCategorias.BackgroundColor = EstilosUI.ColorFondoOscuro;
+            splitCategorias.Panel1.BackColor = EstilosUI.ColorFondoOscuro;
+
+            Color fondoClaro = Color.FromArgb(245, 245, 245);
+
+            grpDatosCategoria.BackColor = fondoClaro;
+            tblDatosCategoria.BackColor = fondoClaro;
+            panelBotonesCat.BackColor = fondoClaro;
+
+            Font fuenteLabels = new Font("Segoe UI", 9F, FontStyle.Regular);
+            Font fuenteInputs = new Font("Segoe UI", 9F, FontStyle.Regular);
+
+            Label[] labels =
+            {
+             lblID,
+             lblNombre,
+             lblDescripcion
+             };
+
+            foreach (Label lbl in labels)
+            {
+                lbl.ForeColor = EstilosUI.ColorTextoOscuro;
+                lbl.Font = fuenteLabels;
+            }
+
+            grpDatosCategoria.ForeColor = EstilosUI.ColorTextoOscuro;
+            grpDatosCategoria.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+
+            TextBox[] cajas =
+            {
+              txtId,
+             txtNombre,
+             txtDescripcion
+             };
+
+            foreach (TextBox t in cajas)
+            {
+                t.BackColor = Color.White;
+                t.ForeColor = EstilosUI.ColorTextoOscuro;
+                t.BorderStyle = BorderStyle.FixedSingle;
+                t.Font = fuenteInputs;
+            }
+
+            EstilosUI.AplicarEstiloBoton(btnNuevo);
+            EstilosUI.AplicarEstiloBoton(btnGuardar);
+            EstilosUI.AplicarEstiloBotonSecundario(btnEliminar);
+            EstilosUI.AplicarEstiloBotonSecundario(btnCancelar);
+
+            foreach (Control c in tableLayoutPanel1.Controls)
+            {
+                c.Margin = new Padding(5, 5, 5, 5);
+                c.Width = 95;   
+                c.Height = 32;
+            }
+
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private void FormCategorias_Load(object sender, EventArgs e)

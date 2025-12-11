@@ -20,31 +20,31 @@ namespace GestorMovilChip
         {
             InitializeComponent();
 
-            // Ventana fija como el resto
+            // Form fijo como el resto
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
-            // ===== FONDO OSCURO GENERAL (misma línea que el resto) =====
+            //  FONDO OSCURO GENERAL 
             EstilosUI.AplicarEstiloFormularioOscuro(this);
 
-            // ===== GRID IZQUIERDO (LISTADO) =====
+            //  GRID IZQUIERDO 
             EstilosUI.AplicarEstiloDataGridView(dgvClientes);
             dgvClientes.BackgroundColor = EstilosUI.ColorFondoOscuro;
             splitContainer1.Panel1.BackColor = EstilosUI.ColorFondoOscuro;
 
-            // ===== ZONA DERECHA CLARITA (FICHA CLIENTE) =====
+            //  ZONA DERECHA CLARITA (FICHA CLIENTE) 
             Color fondoClaro = EstilosUI.ColorFondoFormulario;
 
             splitContainer1.Panel2.BackColor = fondoClaro;
             grpDatosCliente.BackColor = fondoClaro;
             tblDatosCliente.BackColor = fondoClaro;
-            tableLayoutPanel1.BackColor = fondoClaro;  // panel botones arriba (Nuevo / Eliminar)
-            tableLayoutPanel2.BackColor = fondoClaro;  // panel botones abajo (Guardar / Cancelar)
+            tableLayoutPanel1.BackColor = fondoClaro;  // panel botones arriba 
+            tableLayoutPanel2.BackColor = fondoClaro;  // panel botones abajo 
 
             grpDatosCliente.ForeColor = EstilosUI.ColorTextoOscuro;
             grpDatosCliente.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
 
-            // ===== FUENTES Y COLORES DE LABELS / TEXTBOX =====
+            //  FUENTES Y COLORES DE LABELS 
             Font fuenteLabels = new Font("Segoe UI", 9F, FontStyle.Regular);
             Font fuenteInputs = new Font("Segoe UI", 9F, FontStyle.Regular);
 
@@ -68,16 +68,16 @@ namespace GestorMovilChip
             lblBuscarCli.Font = fuenteLabels;
             lblBuscarCli.ForeColor = EstilosUI.ColorTextoOscuro;
 
-            // ===== BOTONES =====
-            // Primarios
+            //  BOTONES 
+            // 1-Primarios
             EstilosUI.AplicarEstiloBoton(btnNuevo);
             EstilosUI.AplicarEstiloBoton(btnGuardar);
 
-            // Secundarios
+            // 2-Secundarios
             EstilosUI.AplicarEstiloBotonSecundario(btnEliminar);
             EstilosUI.AplicarEstiloBotonSecundario(btnCancelar);
 
-            // Todos con mismo tamaño / margen
+            // Todos con el mismo tamaño / margen
             EstilosUI.AplicarBotonesCrud(btnNuevo, btnGuardar, btnEliminar, btnCancelar);
 
         }

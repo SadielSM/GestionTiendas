@@ -37,6 +37,7 @@
             this.panelLogin = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.linkOlvido = new System.Windows.Forms.LinkLabel();
             this.panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +83,7 @@
             // 
             this.btnLogin.AutoSize = true;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(315, 220);
+            this.btnLogin.Location = new System.Drawing.Point(315, 194);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(109, 36);
             this.btnLogin.TabIndex = 4;
@@ -94,7 +95,7 @@
             // 
             this.lblMensaje.AutoSize = true;
             this.lblMensaje.ForeColor = System.Drawing.Color.Red;
-            this.lblMensaje.Location = new System.Drawing.Point(158, 261);
+            this.lblMensaje.Location = new System.Drawing.Point(152, 279);
             this.lblMensaje.Name = "lblMensaje";
             this.lblMensaje.Size = new System.Drawing.Size(0, 16);
             this.lblMensaje.TabIndex = 5;
@@ -103,6 +104,7 @@
             // 
             this.panelLogin.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLogin.Controls.Add(this.linkOlvido);
             this.panelLogin.Controls.Add(this.pictureBox1);
             this.panelLogin.Controls.Add(this.txtUsuario);
             this.panelLogin.Controls.Add(this.label1);
@@ -112,7 +114,7 @@
             this.panelLogin.Controls.Add(this.lblMensaje);
             this.panelLogin.Location = new System.Drawing.Point(86, 90);
             this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(529, 300);
+            this.panelLogin.Size = new System.Drawing.Size(562, 312);
             this.panelLogin.TabIndex = 6;
             // 
             // pictureBox1
@@ -134,6 +136,17 @@
             this.label3.Size = new System.Drawing.Size(244, 41);
             this.label3.TabIndex = 5;
             this.label3.Text = "INICIAR SESIÓN";
+            // 
+            // linkOlvido
+            // 
+            this.linkOlvido.AutoSize = true;
+            this.linkOlvido.Location = new System.Drawing.Point(266, 243);
+            this.linkOlvido.Name = "linkOlvido";
+            this.linkOlvido.Size = new System.Drawing.Size(196, 16);
+            this.linkOlvido.TabIndex = 8;
+            this.linkOlvido.TabStop = true;
+            this.linkOlvido.Text = "\"¿Has olvidado la contraseña?\"";
+            this.linkOlvido.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOlvido_LinkClicked);
             // 
             // FormLogin
             // 
@@ -169,5 +182,6 @@
         private System.Windows.Forms.Panel panelLogin;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.LinkLabel linkOlvido;
     }
 }

@@ -33,8 +33,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblTotalVenta = new System.Windows.Forms.Label();
             this.btnActualizar = new System.Windows.Forms.Button();
+            this.panelBottom = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
+            this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvVentas
@@ -43,14 +45,15 @@
             this.dgvVentas.AllowUserToDeleteRows = false;
             this.dgvVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVentas.Location = new System.Drawing.Point(12, 12);
+            this.dgvVentas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvVentas.Location = new System.Drawing.Point(0, 0);
             this.dgvVentas.MultiSelect = false;
             this.dgvVentas.Name = "dgvVentas";
             this.dgvVentas.ReadOnly = true;
             this.dgvVentas.RowHeadersWidth = 51;
             this.dgvVentas.RowTemplate.Height = 24;
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentas.Size = new System.Drawing.Size(1309, 234);
+            this.dgvVentas.Size = new System.Drawing.Size(1333, 234);
             this.dgvVentas.TabIndex = 0;
             this.dgvVentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellClick);
             // 
@@ -60,20 +63,21 @@
             this.dgvDetalle.AllowUserToDeleteRows = false;
             this.dgvDetalle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetalle.Location = new System.Drawing.Point(12, 252);
+            this.dgvDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDetalle.Location = new System.Drawing.Point(0, 234);
             this.dgvDetalle.MultiSelect = false;
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.ReadOnly = true;
             this.dgvDetalle.RowHeadersWidth = 51;
             this.dgvDetalle.RowTemplate.Height = 24;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(1309, 248);
+            this.dgvDetalle.Size = new System.Drawing.Size(1333, 503);
             this.dgvDetalle.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 544);
+            this.label1.Location = new System.Drawing.Point(36, 61);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 16);
             this.label1.TabIndex = 2;
@@ -82,7 +86,7 @@
             // lblTotalVenta
             // 
             this.lblTotalVenta.AutoSize = true;
-            this.lblTotalVenta.Location = new System.Drawing.Point(133, 544);
+            this.lblTotalVenta.Location = new System.Drawing.Point(143, 61);
             this.lblTotalVenta.Name = "lblTotalVenta";
             this.lblTotalVenta.Size = new System.Drawing.Size(44, 16);
             this.lblTotalVenta.TabIndex = 3;
@@ -90,7 +94,8 @@
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(1231, 531);
+            this.btnActualizar.AutoSize = true;
+            this.btnActualizar.Location = new System.Drawing.Point(1187, 48);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(90, 29);
             this.btnActualizar.TabIndex = 4;
@@ -98,26 +103,36 @@
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
+            // panelBottom
+            // 
+            this.panelBottom.Controls.Add(this.label1);
+            this.panelBottom.Controls.Add(this.btnActualizar);
+            this.panelBottom.Controls.Add(this.lblTotalVenta);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 610);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(1333, 127);
+            this.panelBottom.TabIndex = 5;
+            // 
             // FormListadoVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1333, 586);
-            this.Controls.Add(this.btnActualizar);
-            this.Controls.Add(this.lblTotalVenta);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1333, 737);
+            this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.dgvDetalle);
             this.Controls.Add(this.dgvVentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormListadoVentas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormListadoVentas";
+            this.Text = "Listado de Ventas";
             this.Load += new System.EventHandler(this.FormListadoVentas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
+            this.panelBottom.ResumeLayout(false);
+            this.panelBottom.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -128,5 +143,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTotalVenta;
         private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.Panel panelBottom;
     }
 }
