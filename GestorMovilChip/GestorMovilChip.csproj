@@ -201,6 +201,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Fotos\candado.png" />
     <Content Include="Fotos\Descargar dibujos animados icono de candado gratis.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

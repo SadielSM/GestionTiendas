@@ -423,5 +423,10 @@ namespace GestorMovilChip
         {
 
         }
+
+        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

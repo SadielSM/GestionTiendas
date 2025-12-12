@@ -21,12 +21,12 @@ namespace GestorMovilChip.Datos
                 conexion.Open();
 
                 string sql = "SELECT id_cliente, nombre, telefono, email, dni, direccion " +
-                             "FROM clientes";
+                             "FROM clientes ";
 
                 if (filtroNombre != "")
                     sql += " WHERE nombre LIKE @filtro";
 
-                sql += " ORDER BY nombre";
+                sql += " ORDER BY id_cliente,nombre asc";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conexion);
 
