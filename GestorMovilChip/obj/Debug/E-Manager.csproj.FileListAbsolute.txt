@@ -1,0 +1,11 @@
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\E-Manager.csproj.AssemblyReference.cache
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormCategorias.resources
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormClientes.resources
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormListadoVentas.resources
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormLogin.resources
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormMenuPrincipal.resources
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormProductos.resources
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\GestorMovilChip.FormVentas.resources
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\EManager.Properties.Resources.resources
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\E-Manager.csproj.GenerateResource.cache
+C:\Users\SadielSM\source\repos\GestionTiendas\GestorMovilChip\obj\Debug\E-Manager.csproj.CoreCompileInputs.cache

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCategorias));
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
             this.lblID = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
@@ -262,6 +263,7 @@
             this.ClientSize = new System.Drawing.Size(1336, 740);
             this.Controls.Add(this.splitCategorias);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormCategorias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

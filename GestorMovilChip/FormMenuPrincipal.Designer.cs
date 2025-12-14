@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenuPrincipal));
             this.lblUsuarioLogueado = new System.Windows.Forms.Label();
             this.btnCategorias = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             this.lblStockBajo = new System.Windows.Forms.Label();
             this.btnRefrescarDashboard = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTituloApp = new System.Windows.Forms.Label();
             this.panelLeft = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,8 +55,8 @@
             this.panelCardStock = new System.Windows.Forms.Panel();
             this.panelCardMes = new System.Windows.Forms.Panel();
             this.panelCardHoy = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelLeft.SuspendLayout();
             this.panelDashboard.SuspendLayout();
             this.tblMainDashboard.SuspendLayout();
@@ -64,7 +66,6 @@
             this.panelCardStock.SuspendLayout();
             this.panelCardMes.SuspendLayout();
             this.panelCardHoy.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblUsuarioLogueado
@@ -240,6 +241,16 @@
             this.panelTop.Size = new System.Drawing.Size(1336, 125);
             this.panelTop.TabIndex = 14;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::EManager.Properties.Resources.logotipo;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 37);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(88, 68);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
             // lblTituloApp
             // 
             this.lblTituloApp.AutoSize = true;
@@ -373,16 +384,6 @@
             this.panelCardHoy.Size = new System.Drawing.Size(370, 160);
             this.panelCardHoy.TabIndex = 0;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::GestorMovilChip.Properties.Resources.logotipo;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 37);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(88, 68);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            // 
             // FormMenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -393,6 +394,7 @@
             this.Controls.Add(this.panelTop);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "FormMenuPrincipal";
@@ -403,6 +405,7 @@
             this.Load += new System.EventHandler(this.FormMenuPrincipal_Load);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelLeft.ResumeLayout(false);
             this.panelLeft.PerformLayout();
             this.panelDashboard.ResumeLayout(false);
@@ -416,7 +419,6 @@
             this.panelCardMes.PerformLayout();
             this.panelCardHoy.ResumeLayout(false);
             this.panelCardHoy.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

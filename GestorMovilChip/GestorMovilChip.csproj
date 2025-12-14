@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{04F734C5-F024-4EC8-80D1-29C45BF83087}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>GestorMovilChip</RootNamespace>
-    <AssemblyName>GestorMovilChip</AssemblyName>
+    <RootNamespace>EManager</RootNamespace>
+    <AssemblyName>EManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,8 +32,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>e_manager_E.ico</ApplicationIcon>
+  </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>GestorMovilChip.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
@@ -201,11 +208,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="e_manager_E.ico" />
     <Content Include="Fotos\candado.png" />
     <Content Include="Fotos\Descargar dibujos animados icono de candado gratis.jpg" />
     <Content Include="Fotos\e_manager_E.png" />
     <Content Include="Fotos\logotipo-removebg-preview.png" />
     <Content Include="Fotos\logotipo.png" />
+    <Content Include="iconoE-Manager.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
