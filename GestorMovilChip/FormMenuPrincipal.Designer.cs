@@ -53,6 +53,7 @@
             this.panelCardStock = new System.Windows.Forms.Panel();
             this.panelCardMes = new System.Windows.Forms.Panel();
             this.panelCardHoy = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelTop.SuspendLayout();
             this.panelLeft.SuspendLayout();
             this.panelDashboard.SuspendLayout();
@@ -63,6 +64,7 @@
             this.panelCardStock.SuspendLayout();
             this.panelCardMes.SuspendLayout();
             this.panelCardHoy.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblUsuarioLogueado
@@ -227,6 +229,7 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.pictureBox1);
             this.panelTop.Controls.Add(this.btnRefrescarDashboard);
             this.panelTop.Controls.Add(this.lblTituloApp);
             this.panelTop.Controls.Add(this.lblUsuarioLogueado);
@@ -242,9 +245,9 @@
             this.lblTituloApp.AutoSize = true;
             this.lblTituloApp.Location = new System.Drawing.Point(107, 37);
             this.lblTituloApp.Name = "lblTituloApp";
-            this.lblTituloApp.Size = new System.Drawing.Size(127, 20);
+            this.lblTituloApp.Size = new System.Drawing.Size(82, 20);
             this.lblTituloApp.TabIndex = 1;
-            this.lblTituloApp.Text = "Gestor Móvil Chip";
+            this.lblTituloApp.Text = "E-Manager";
             // 
             // panelLeft
             // 
@@ -370,6 +373,16 @@
             this.panelCardHoy.Size = new System.Drawing.Size(370, 160);
             this.panelCardHoy.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::GestorMovilChip.Properties.Resources.logotipo;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 37);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(88, 68);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormMenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -403,6 +416,7 @@
             this.panelCardMes.PerformLayout();
             this.panelCardHoy.ResumeLayout(false);
             this.panelCardHoy.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -434,5 +448,6 @@
         private System.Windows.Forms.GroupBox grpUltimasVentas;
         private System.Windows.Forms.DataGridView dgvUltimasVentas;
         private System.Windows.Forms.TableLayoutPanel tblMainDashboard;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

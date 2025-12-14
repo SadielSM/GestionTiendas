@@ -360,7 +360,7 @@
             this.MaximizeBox = false;
             this.Name = "FormClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gestión de Clientes";
+            this.Text = "Clientes";
             this.Load += new System.EventHandler(this.FormClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);

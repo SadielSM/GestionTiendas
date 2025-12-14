@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +19,34 @@ namespace GestorMovilChip
         {
             InitializeComponent();
 
+            /*
             EstilosUI.AplicarEstiloFormulario(this);
             this.BackColor = EstilosUI.ColorPrincipal; // fondo azul
+            */
+            // EstilosUI.AplicarEstiloBoton(btnLogin);
 
-            EstilosUI.AplicarEstiloBoton(btnLogin);
+            this.DoubleBuffered = true;               // para que no parpadee
+            this.Paint += FormLogin_Paint;            // manejamos el evento Paint del formulario
+           
+        }
+
+        //Método para el degradado 
+        private void FormLogin_Paint(object sender, PaintEventArgs e)
+        {
+            Rectangle rect = this.ClientRectangle;
+
+            // Colores del degradado (puedes ajustarlos)
+            Color colorArriba = Color.FromArgb(120, 180, 235);  // azul más claro
+            Color colorAbajo = Color.FromArgb(40, 90, 160);    // azul más oscuro
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+                       rect,
+                       colorArriba,
+                       colorAbajo,
+                       LinearGradientMode.Vertical))            // vertical, de arriba a abajo
+            {
+                e.Graphics.FillRectangle(brush, rect);
+            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

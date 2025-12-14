@@ -20,7 +20,6 @@ namespace GestorMovilChip
         {
             InitializeComponent();
 
-            // Form fijo como el resto
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
@@ -32,7 +31,6 @@ namespace GestorMovilChip
             dgvClientes.BackgroundColor = EstilosUI.ColorFondoOscuro;
             splitContainer1.Panel1.BackColor = EstilosUI.ColorFondoOscuro;
 
-            //  ZONA DERECHA CLARITA (FICHA CLIENTE) 
             Color fondoClaro = EstilosUI.ColorFondoFormulario;
 
             splitContainer1.Panel2.BackColor = fondoClaro;
@@ -64,7 +62,6 @@ namespace GestorMovilChip
                 }
             }
 
-            // Por si el label de Buscar está fuera del foreach
             lblBuscarCli.Font = fuenteLabels;
             lblBuscarCli.ForeColor = EstilosUI.ColorTextoOscuro;
 
@@ -150,7 +147,6 @@ namespace GestorMovilChip
                 }
             }
         }
-
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {

@@ -87,7 +87,6 @@
             this.dgvProductos.Size = new System.Drawing.Size(936, 736);
             this.dgvProductos.TabIndex = 0;
             this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick);
-            this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             // 
             // label1
             // 
@@ -99,7 +98,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "ID";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -111,7 +109,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Nombre:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -123,7 +120,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Descripción:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -135,7 +131,6 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Categoría:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -147,7 +142,6 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Precio Compra:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -159,7 +153,6 @@
             this.label6.TabIndex = 7;
             this.label6.Text = "Precio Venta:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -171,7 +164,6 @@
             this.label7.TabIndex = 8;
             this.label7.Text = "Stock:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label8
             // 
@@ -183,7 +175,6 @@
             this.label8.TabIndex = 9;
             this.label8.Text = "Código barras:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // txtIdProducto
             // 
@@ -325,7 +316,6 @@
             this.lblBuscarProducto.TabIndex = 24;
             this.lblBuscarProducto.Text = "Buscar: ";
             this.lblBuscarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblBuscarProducto.Click += new System.EventHandler(this.lblBuscarProducto_Click);
             // 
             // txtBuscarProducto
             // 
@@ -364,7 +354,6 @@
             this.grpDatosProducto.TabIndex = 29;
             this.grpDatosProducto.TabStop = false;
             this.grpDatosProducto.Text = "Datos del producto";
-            this.grpDatosProducto.Enter += new System.EventHandler(this.grpDatosProducto_Enter);
             // 
             // panelBotones
             // 
@@ -453,7 +442,7 @@
             this.MaximizeBox = false;
             this.Name = "FormProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gestión de Productos";
+            this.Text = "Productos";
             this.Load += new System.EventHandler(this.FormProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.splitProductos.Panel1.ResumeLayout(false);

@@ -42,8 +42,8 @@
             this.splitCategorias = new System.Windows.Forms.SplitContainer();
             this.grpDatosCategoria = new System.Windows.Forms.GroupBox();
             this.panelBotonesCat = new System.Windows.Forms.Panel();
-            this.tblDatosCategoria = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tblDatosCategoria = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitCategorias)).BeginInit();
             this.splitCategorias.Panel1.SuspendLayout();
@@ -51,8 +51,8 @@
             this.splitCategorias.SuspendLayout();
             this.grpDatosCategoria.SuspendLayout();
             this.panelBotonesCat.SuspendLayout();
-            this.tblDatosCategoria.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tblDatosCategoria.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCategorias
@@ -216,6 +216,24 @@
             this.panelBotonesCat.Size = new System.Drawing.Size(319, 178);
             this.panelBotonesCat.TabIndex = 11;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnNuevo, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnEliminar, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnGuardar, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(319, 178);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
             // tblDatosCategoria
             // 
             this.tblDatosCategoria.ColumnCount = 2;
@@ -237,24 +255,6 @@
             this.tblDatosCategoria.Size = new System.Drawing.Size(319, 128);
             this.tblDatosCategoria.TabIndex = 0;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnNuevo, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnEliminar, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnGuardar, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(319, 178);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
             // FormCategorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -265,7 +265,7 @@
             this.MaximizeBox = false;
             this.Name = "FormCategorias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gestión de Categorías";
+            this.Text = "Categorías";
             this.Load += new System.EventHandler(this.FormCategorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.splitCategorias.Panel1.ResumeLayout(false);
@@ -274,9 +274,9 @@
             this.splitCategorias.ResumeLayout(false);
             this.grpDatosCategoria.ResumeLayout(false);
             this.panelBotonesCat.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.tblDatosCategoria.ResumeLayout(false);
             this.tblDatosCategoria.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

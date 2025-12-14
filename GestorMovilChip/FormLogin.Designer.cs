@@ -133,6 +133,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.Window;
             this.label3.Location = new System.Drawing.Point(275, 27);
@@ -143,11 +144,11 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::GestorMovilChip.Properties.Resources.candado1;
-            this.pictureBox1.InitialImage = global::GestorMovilChip.Properties.Resources.candado;
-            this.pictureBox1.Location = new System.Drawing.Point(20, 75);
+            this.pictureBox1.Image = global::GestorMovilChip.Properties.Resources.logotipo_removebg_preview;
+            this.pictureBox1.InitialImage = global::GestorMovilChip.Properties.Resources.logotipo;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 75);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(132, 120);
+            this.pictureBox1.Size = new System.Drawing.Size(153, 155);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
@@ -164,7 +165,7 @@
             this.MaximizeBox = false;
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gestor Tienda";
+            this.Text = "E-Manager";
             this.Load += new System.EventHandler(this.FormLogin_Load);
             this.Resize += new System.EventHandler(this.FormLogin_Resize);
             this.panelLogin.ResumeLayout(false);

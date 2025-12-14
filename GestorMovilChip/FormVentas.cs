@@ -28,7 +28,7 @@ namespace GestorMovilChip
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
-            // FONDO OSCURO GENERAL (como la pantalla principal) 
+            // FONDO OSCURO GENERAL 
             EstilosUI.AplicarEstiloFormularioOscuro(this);
 
             // GRID (líneas de venta) 

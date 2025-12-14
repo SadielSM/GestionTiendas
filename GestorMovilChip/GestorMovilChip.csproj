@@ -203,6 +203,9 @@
   <ItemGroup>
     <Content Include="Fotos\candado.png" />
     <Content Include="Fotos\Descargar dibujos animados icono de candado gratis.jpg" />
+    <Content Include="Fotos\e_manager_E.png" />
+    <Content Include="Fotos\logotipo-removebg-preview.png" />
+    <Content Include="Fotos\logotipo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -17,7 +17,7 @@ namespace GestorMovilChip.Clase
             using (SHA256 sha = SHA256.Create())
             {
                 byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(texto));
-                // Convierte a string tipo "8c6976e5..."
+                // Convierte a string ejemplo: "8c6976e5..."
                 return BitConverter.ToString(bytes).Replace("-", "").ToLower();
             }
         }

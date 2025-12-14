@@ -10,7 +10,6 @@ namespace GestorMovilChip.Clase
 {
     public static class EstilosUI
     {
-        // Colores base (ajústalos a tu gusto)
         public static Color ColorFondoFormulario = Color.FromArgb(235, 239, 244);
         public static Color ColorPanel = Color.FromArgb(30, 30, 40);
         public static Color ColorPrincipal = Color.FromArgb(52, 152, 219);   // azul
@@ -87,7 +86,7 @@ namespace GestorMovilChip.Clase
             b.TextAlign = ContentAlignment.MiddleLeft;
             b.Padding = new Padding(15, 0, 0, 0);
 
-            b.FlatAppearance.MouseOverBackColor = Color.FromArgb(41, 128, 185); // un pelín más oscuro
+            b.FlatAppearance.MouseOverBackColor = Color.FromArgb(41, 128, 185); //más oscuro
             b.FlatAppearance.MouseDownBackColor = Color.FromArgb(31, 97, 141);
         }
 
@@ -142,8 +141,6 @@ namespace GestorMovilChip.Clase
             c.FlatStyle = FlatStyle.Flat;
         }
 
-
-        // === PANTALLA CRUD: FONDO OSCURO + DETALLE DERECHO CLARO ===
         public static void AplicarPantallaCrudOscuroConDetalleClaro(
             Form form,
             string textoTitulo,
@@ -210,7 +207,7 @@ namespace GestorMovilChip.Clase
                 }
             }
 
-            // 6) TextBox en blanco
+            //TextBox en blanco
             foreach (TextBox t in cajasTexto)
             {
                 t.BackColor = Color.White;
@@ -219,13 +216,13 @@ namespace GestorMovilChip.Clase
                 t.Font = fuenteInputs;
             }
 
-            // 7) Combo en claro
+            //Combo en claro
             comboCategoria.BackColor = Color.White;
             comboCategoria.ForeColor = ColorTextoOscuro;
             comboCategoria.FlatStyle = FlatStyle.Standard;
             comboCategoria.Font = fuenteInputs;
 
-            // 8) Botones
+            //Botones
             AplicarEstiloBoton(btnNuevo);
             AplicarEstiloBoton(btnGuardar);
             AplicarEstiloBotonSecundario(btnEliminar);
@@ -238,7 +235,7 @@ namespace GestorMovilChip.Clase
         {
             foreach (var b in botones)
             {
-                b.AutoSize = false;           // importante para que respeten Width/Height
+                b.AutoSize = false;           // importante
                 b.Width = 120;
                 b.Height = 38;
                 b.Margin = new Padding(6);    // separación entre botones

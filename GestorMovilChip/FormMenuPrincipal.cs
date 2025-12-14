@@ -57,7 +57,7 @@ namespace GestorMovilChip
 
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
         {
-            this.Text = "Gestor Tienda - " + nombreUsuario + " (" + rolUsuario + ")";
+            this.Text = "Menu Principal - " + nombreUsuario + " (" + rolUsuario + ")";
 
             lblUsuarioLogueado.Text = "Bienvenido, " + nombreUsuario;
 
@@ -269,7 +269,7 @@ namespace GestorMovilChip
         {
             try
             {
-                var lista = VentaDAO.ObtenerVentas(); // ya la tenemos hecha
+                var lista = VentaDAO.ObtenerVentas(); 
 
                 // Solo las 10 primeras 
                 if (lista.Count > maxFilas)
